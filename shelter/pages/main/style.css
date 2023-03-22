@@ -15,7 +15,7 @@ body p {
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 1280px;
     margin: 0 auto;
     padding: 0 40px;
 }
@@ -149,12 +149,13 @@ body p {
     width: 35%;
 }
 
-.about-block .content-title,
-.our-friends-block .content-title {
+.content-title {
     color: #545454;
     font-size: 35px;
     line-height: 130%;
     font-weight: 400;
+    letter-spacing: 0.06em;
+    text-align: center;
 }
 
 .about-block .content-paragraph {
@@ -174,8 +175,6 @@ body p {
 
 .our-friends-block .content-title {
     max-width: 400px;
-    text-align: center;
-    letter-spacing: 0.06em;
     margin-bottom: 60px;
 }
 
@@ -221,4 +220,66 @@ body p {
 
 .our-friends-block .right-btn {
     right: -82px;
+}
+
+.help-block {
+    padding: 80px 27px 45px 27px;
+}
+
+.help-block .content-title {
+    max-width: 312px;
+    margin: 0 auto 60px auto;
+}
+
+.help-block .icons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.help-block .icon {
+    padding-top: 100px;
+    font-size: 20px;
+    line-height: 115%;
+    color: #545454;
+    padding-left: 60px;
+    padding-right: 60px;
+    margin-bottom: 55px;
+    letter-spacing: 0.06em;
+}
+
+.help-block .ic-food {
+    background: url('../../assets/images/icon-pet-food.svg') 50% 0 no-repeat;
+}
+
+.help-block .ic-transport {
+    background: url('../../assets/images/icon-transportation.svg') 50% 0 no-repeat;
+}
+
+.help-block .ic-toys {
+    background: url('../../assets/images/icon-toys.svg') 50% 0 no-repeat;
+}
+
+.help-block .ic-bowls {
+    background: url('../../assets/images/icon-bowls-and-cups.svg') 50% 0 no-repeat;
+}
+
+.help-block .ic-shampoos {
+    background: url('../../assets/images/icon-shampoos.svg') 50% 0 no-repeat;
+}
+
+.help-block .ic-vits {
+    background: url('../../assets/images/icon-vitamins.svg') 50% 0 no-repeat;
+}
+
+.help-block .ic-medicines {
+    background: url('../../assets/images/icon-medicines.svg') 50% 0 no-repeat;
+}
+
+.help-block .ic-collars {
+    background: url('../../assets/images/icon-collars-leashes.svg') 50% 0 no-repeat;
+}
+
+.help-block .ic-sleep {
+    background: url('../../assets/images/icon-sleeping-area.svg') 50% 0 no-repeat;
 }
