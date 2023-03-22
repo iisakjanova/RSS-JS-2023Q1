@@ -106,17 +106,20 @@ body p {
     line-height: 160%; */
 }
 
-.start-screen-content .content-btn {
+.round-btn {
     padding: 15px 45px;
-    background-color: #F1CDB3;
     border-radius: 100px;
-    border: none;
+    border: 2px solid #F1CDB3;
     font-size: 17px;
     color: #292929;
     cursor: pointer;
 }
 
-.start-screen-content .content-btn:hover {
+.primary-background-color {
+    background-color: #F1CDB3;
+}
+
+.round-btn:hover {
     background-color: #FDDCC4;
 }
 
@@ -146,7 +149,8 @@ body p {
     width: 35%;
 }
 
-.about-block .content-title {
+.about-block .content-title,
+.our-friends-block .content-title {
     color: #545454;
     font-size: 35px;
     line-height: 130%;
@@ -155,4 +159,66 @@ body p {
 
 .about-block .content-paragraph {
     color: #4C4C4C;
+}
+
+.our-friends-block {
+    background-color: #F6F6F6;
+    padding-bottom: 100px;
+}
+
+.our-friends-block-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.our-friends-block .content-title {
+    max-width: 400px;
+    text-align: center;
+    letter-spacing: 0.06em;
+    margin-bottom: 60px;
+}
+
+.our-friends-block .content-title span {
+    display: block;
+}
+
+.our-friends-block .cards {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+.our-friends-block .card {
+    width: 22.5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 60px;
+}
+
+.our-friends-block .card-title {
+    font-size: 20px;
+    letter-spacing: 0.06em;
+    color: #545454;
+}
+
+.small-btn {
+    position: absolute;
+    font-size: 10px;
+    padding: 0;
+    display: block;
+    width: 23px;
+    height: 23px;
+    border-radius: 50%;
+    text-align: center;
+    top: calc(50% - 200px/2);
+}
+
+.our-friends-block .left-btn {
+    left: -82px;
+}
+
+.our-friends-block .right-btn {
+    right: -82px;
 }
