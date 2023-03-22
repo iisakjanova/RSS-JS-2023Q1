@@ -283,3 +283,60 @@ body p {
 .help-block .ic-sleep {
     background: url('../../assets/images/icon-sleeping-area.svg') 50% 0 no-repeat;
 }
+
+.in-addition-block {
+    color: #545454;
+    letter-spacing: 0.06em;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    background-color: #F6F6F6;
+}
+
+.in-addition-block-inner {
+    display: flex;
+    justify-content: center;
+}
+
+.in-addition-block .in-addition-picture {
+    width: 42%;
+    max-width: 505px;
+}
+
+.in-addition-block .in-addition-picture img {
+    width: 100%;
+    height: auto;
+}
+
+.in-addition-block .in-addition-content {
+    width: 32%;
+    max-width: 380px;
+    margin-left: 20px;
+}
+
+.in-addition-block .content-title {
+    text-align: start;
+}
+
+.in-addition-block .content-title span {
+    display: block;
+}
+
+.in-addition-block .content-subtitle {
+    line-height: 110%;
+}
+
+.in-addition-block .credit-card-number {
+    padding: 10px 15px 10px 50px;
+    border-radius: 9px;
+    font-size: 20px;
+    line-height: 115%;
+    margin-right: 20px;
+    background: url('../../assets/images/credit-card.svg') 15px 50% no-repeat, #F1CDB3;
+}
+
+.in-addition-block .content-paragraph {
+    font-size: 12px;
+    line-height: 150%;
+    font-style: italic;
+    color: #B2B2B2;
+}
