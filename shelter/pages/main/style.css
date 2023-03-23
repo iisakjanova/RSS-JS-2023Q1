@@ -78,7 +78,9 @@ body p {
     color: #CDCDCD;
 }
 
-.main-nav a:focus {
+.main-nav a:focus,
+.main-nav a:hover,
+.main-nav a:active {
     outline: none;
     color: #FAFAFA;
     border-bottom: 3px solid #F1CDB3;
@@ -100,10 +102,7 @@ body p {
 }
 
 .start-screen-content .content-paragraph {
-    /* font-family: Arial, Helvetica, sans-serif; */
     color: #CDCDCD;
-    /* font-size: 15px;
-    line-height: 160%; */
 }
 
 .round-btn {
@@ -113,6 +112,7 @@ body p {
     font-size: 17px;
     color: #292929;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .primary-background-color {
@@ -332,6 +332,14 @@ body p {
     line-height: 115%;
     margin-right: 20px;
     background: url('../../assets/images/credit-card.svg') 15px 50% no-repeat, #F1CDB3;
+    color: #545454;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.in-addition-block .credit-card-number:hover {
+    background-color: #FDDCC4;
+    color: #FAFAFA;
 }
 
 .in-addition-block .content-paragraph {
@@ -339,4 +347,67 @@ body p {
     line-height: 150%;
     font-style: italic;
     color: #B2B2B2;
+}
+
+.footer {
+    background: url(../../assets/images/noise_transparent@2x.png), radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%), #211F20;
+    padding-top: 50px;
+}
+
+.footer-inner {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    width: 23.5%;
+    max-width: 279px;
+}
+
+.footer-content .content-title {
+    color: #FFFFFF;
+    text-align: start;
+}
+
+.footer .link {
+    font-size: 20px;
+    color: #F1CDB3;
+    text-decoration: none;
+    position: relative;
+    padding-left: 50px;
+    margin-bottom: 44px;
+    cursor: pointer;
+}
+
+.footer .link:hover {
+    color: #FFFFFF;
+}
+
+.footer .link::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 32px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.footer .email::before {
+    background: url('../../assets/images/icon-email.svg') no-repeat;
+}
+
+.footer .phone::before {
+    background: url('../../assets/images/icon-phone.svg') no-repeat;
+}
+
+.footer .marker::before {
+    background: url('../../assets/images/icon-marker.png') no-repeat;
+}
+
+.footer-content img {
+    width: 100%;
+    height: auto;
 }
