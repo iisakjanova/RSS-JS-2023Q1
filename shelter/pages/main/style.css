@@ -27,7 +27,6 @@ body p {
 
 .header {
     font-family: Arial, Helvetica, sans-serif;
-    margin-bottom: 90px;
 }
 
 .header-inner {
@@ -79,15 +78,19 @@ body p {
 }
 
 .main-nav a:focus,
-.main-nav a:hover,
 .main-nav a:active {
     outline: none;
     color: #FAFAFA;
     border-bottom: 3px solid #F1CDB3;
 }
 
+.main-nav a:hover {
+    color: #FAFAFA;
+}
+
 .start-screen-content {
     display: flex;
+    margin-top: 90px;
 }   
 
 .start-screen-content .content {
@@ -113,13 +116,15 @@ body p {
     color: #292929;
     cursor: pointer;
     text-decoration: none;
+    background-color: transparent;
 }
 
 .primary-background-color {
     background-color: #F1CDB3;
 }
 
-.round-btn:hover {
+.round-btn:hover,
+.active {
     background-color: #FDDCC4;
 }
 
@@ -185,7 +190,9 @@ body p {
 .our-friends-block .cards {
     position: relative;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
+    width: 100%;
 }
 
 .our-friends-block .card {
@@ -194,12 +201,23 @@ body p {
     flex-direction: column;
     align-items: center;
     margin-bottom: 60px;
+    border-radius: 9px;
+    background-color: #FAFAFA;
+}
+
+.our-friends-block .card img {
+    width: 100%;
 }
 
 .our-friends-block .card-title {
     font-size: 20px;
     letter-spacing: 0.06em;
     color: #545454;
+}
+
+.our-friends-block .card .round-btn {
+    margin-bottom: 30px;
+    display: block;
 }
 
 .small-btn {
