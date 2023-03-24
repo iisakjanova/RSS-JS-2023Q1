@@ -1,0 +1,60 @@
+.logo-title {
+  color: #545454;
+}
+
+.logo-subtitle {
+  color: #292929;
+}
+
+.main-nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.main-nav li {
+  padding-left: 35px;
+} 
+
+.main-nav a {
+  color: #545454;
+}
+
+.main-nav a:focus,
+.main-nav a:active {
+  outline: none;
+  border-bottom: 3px solid #F1CDB3;
+  color: #545454;
+} 
+
+.main-nav a:hover {
+  color: #292929;
+}
+
+.our-friends-block {
+  padding-top: 80px;
+}
+
+.our-friends-block .content-title {
+  margin-top: 0;
+  margin-bottom: 60px;
+}
+
+.our-friends-block .content-title span {
+  display: block;
+}
+
+.our-friends-block .cards .card {
+  max-width: 270px;
+}
+
+.our-friends-block .pets-pages-btn {
+  width: 52px;
+  height: 52px;
+  padding: 0;
+}
+
+.our-friends-block .pets-pages-buttons {
+  margin: 0 auto;
+}
