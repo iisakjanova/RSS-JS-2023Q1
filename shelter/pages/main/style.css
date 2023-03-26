@@ -35,8 +35,12 @@ body p {
     justify-content: space-between;
 }
 
+.logo {
+    margin: 0;
+}
+
 .logo-link {
-    width: 184px;
+    width: 188px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -50,6 +54,8 @@ body p {
     font-weight: 400;
     line-height: 110%;
     color: #F1CDB3;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
 }
 
 .logo-subtitle {
@@ -57,6 +63,7 @@ body p {
     font-weight: 400;
     line-height: 15px;
     color: #FFFFFF;
+    letter-spacing: 0.1em;
 }
 
 .main-nav ul {
@@ -90,11 +97,11 @@ body p {
 
 .start-screen-content {
     display: flex;
-    margin-top: 90px;
+    margin-top: 97px;
 }   
 
 .start-screen-content .content {
-    width: 42%;
+    width: 39%;
     margin-right: 42px;
 }
 .start-screen-content .content-title {
@@ -102,14 +109,23 @@ body p {
     font-size: 44px;
     line-height: 130%;
     font-weight: 400;
+    margin-top: 158px;
+    margin-bottom: 43px;
+    text-align: start;
+    letter-spacing: normal;
+}
+
+.start-screen-content .content-title span {
+    display: block;
 }
 
 .start-screen-content .content-paragraph {
     color: #CDCDCD;
+    margin-bottom: 56px;
 }
 
 .round-btn {
-    padding: 15px 45px;
+    padding: 15px 43px;
     border-radius: 100px;
     border: 2px solid #F1CDB3;
     font-size: 17px;
@@ -117,13 +133,14 @@ body p {
     cursor: pointer;
     text-decoration: none;
     background-color: transparent;
+    letter-spacing: 0.06em;
 }
 
 .primary-background-color {
     background-color: #F1CDB3;
 }
 
-.round-btn:hover,
+.round-btn:hover:enabled,
 .active {
     background-color: #FDDCC4;
 }
@@ -141,17 +158,22 @@ body p {
 
 .about-block {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     padding-top: 80px;
-    padding-bottom: 100px;
+    padding-bottom: 88px;
 }
 
-.about-block .picture img {
+.about-block .about-picture {
+    margin-left: 15%;
+}
+
+.about-block .about-picture img {
     max-width: 300px;
 }
 
 .about-content {
     width: 35%;
+    margin-right: 15%;
 }
 
 .content-title {
@@ -163,13 +185,24 @@ body p {
     text-align: center;
 }
 
+.about-block .content-title {
+    text-align: start;
+    margin-top: 14px;
+    margin-bottom: 25px;
+}
+
+.about-block .content-title span {
+    display: block;
+}
+
 .about-block .content-paragraph {
     color: #4C4C4C;
+    margin: 0 0 25px 0;
 }
 
 .our-friends-block {
     background-color: #F6F6F6;
-    padding-bottom: 100px;
+    padding-bottom: 98px;
 }
 
 .our-friends-block-inner {
@@ -181,6 +214,7 @@ body p {
 .our-friends-block .content-title {
     max-width: 400px;
     margin-bottom: 60px;
+    margin-top: 80px;
 }
 
 .our-friends-block .content-title span {
@@ -191,8 +225,10 @@ body p {
     position: relative;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
+    margin-left: 8%;
+    margin-right: 8%;
 }
 
 .our-friends-block .card {
@@ -203,6 +239,8 @@ body p {
     margin-bottom: 60px;
     border-radius: 9px;
     background-color: #FAFAFA;
+    margin-left: 45px;
+    margin-right: 45px;
 }
 
 .our-friends-block .card img {
@@ -210,9 +248,11 @@ body p {
 }
 
 .our-friends-block .card-title {
+    font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 20px;
     letter-spacing: 0.06em;
     color: #545454;
+    margin: 25px 0 25px 0;
 }
 
 .our-friends-block .card .round-btn {
@@ -222,26 +262,26 @@ body p {
 
 .small-btn {
     position: absolute;
-    font-size: 10px;
+    font-size: 15px;
     padding: 0;
     display: block;
-    width: 23px;
-    height: 23px;
+    width: 51px;
+    height: 51px;
     border-radius: 50%;
     text-align: center;
-    top: calc(50% - 200px/2);
+    top: calc(50% - 110px/2);
 }
 
 .our-friends-block .left-btn {
-    left: -82px;
+    left: 0px;
 }
 
 .our-friends-block .right-btn {
-    right: -82px;
+    right: 0px;
 }
 
 .help-block {
-    padding: 80px 27px 45px 27px;
+    padding: 80px 27px 48px 27px;
 }
 
 .help-block .content-title {
@@ -256,7 +296,7 @@ body p {
 }
 
 .help-block .icon {
-    padding-top: 100px;
+    padding-top: 88px;
     font-size: 20px;
     line-height: 115%;
     color: #545454;
@@ -305,8 +345,8 @@ body p {
 .in-addition-block {
     color: #545454;
     letter-spacing: 0.06em;
-    padding-top: 100px;
-    padding-bottom: 100px;
+    padding-top: 80px;
+    padding-bottom: 88px;
     background-color: #F6F6F6;
 }
 
@@ -318,6 +358,7 @@ body p {
 .in-addition-block .in-addition-picture {
     width: 42%;
     max-width: 505px;
+    padding-top: 10px;
 }
 
 .in-addition-block .in-addition-picture img {
@@ -328,11 +369,12 @@ body p {
 .in-addition-block .in-addition-content {
     width: 32%;
     max-width: 380px;
-    margin-left: 20px;
+    margin-left: 30px;
 }
 
 .in-addition-block .content-title {
     text-align: start;
+    margin: 0 0 19px 0;
 }
 
 .in-addition-block .content-title span {
@@ -341,10 +383,11 @@ body p {
 
 .in-addition-block .content-subtitle {
     line-height: 110%;
+    margin: 0 0 29px 0;
 }
 
 .in-addition-block .credit-card-number {
-    padding: 10px 15px 10px 50px;
+    padding: 10px 15px 10px 61px;
     border-radius: 9px;
     font-size: 20px;
     line-height: 115%;
@@ -353,6 +396,7 @@ body p {
     color: #545454;
     text-decoration: none;
     cursor: pointer;
+    word-spacing: 1px;
 }
 
 .in-addition-block .credit-card-number:hover {
@@ -365,11 +409,13 @@ body p {
     line-height: 150%;
     font-style: italic;
     color: #B2B2B2;
+    margin-top: 31px;
+    letter-spacing: normal;
 }
 
 .footer {
     background: url(../../assets/images/noise_transparent@2x.png), radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%), #211F20;
-    padding-top: 50px;
+    padding-top: 20px;
 }
 
 .footer-inner {
@@ -380,8 +426,17 @@ body p {
 .footer-content {
     display: flex;
     flex-direction: column;
-    width: 23.5%;
-    max-width: 279px;
+    width: 26%;
+    max-width: 300px;
+}
+
+.footer-content:nth-child(2) {
+    max-width: 315px;
+}
+
+.footer-content:nth-child(2) .link {
+    margin-top: 0px;
+    padding-left: 35px;
 }
 
 .footer-content .content-title {
@@ -394,9 +449,11 @@ body p {
     color: #F1CDB3;
     text-decoration: none;
     position: relative;
-    padding-left: 50px;
-    margin-bottom: 44px;
+    padding-left: 59px;
+    margin-bottom: 40px;
+    margin-top: 10px;
     cursor: pointer;
+    letter-spacing: 0.06em;
 }
 
 .footer .link:hover {
@@ -409,7 +466,7 @@ body p {
     width: 40px;
     height: 32px;
     position: absolute;
-    top: 0;
+    top: -4px;
     left: 0;
 }
 
@@ -428,4 +485,5 @@ body p {
 .footer-content img {
     width: 100%;
     height: auto;
+    padding-top: 20px;
 }
