@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+       
 body {
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
@@ -140,7 +144,7 @@ body p {
     background-color: #F1CDB3;
 }
 
-.round-btn:hover:enabled,
+.round-btn:hover:not([disabled]),
 .active {
     background-color: #FDDCC4;
 }
