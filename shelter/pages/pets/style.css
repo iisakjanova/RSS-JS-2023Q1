@@ -88,4 +88,5 @@
 .pets-pages-buttons .pets-pages-btn:disabled {
   color: #CDCDCD;
   border-color: #CDCDCD;
+  cursor: not-allowed;
 }

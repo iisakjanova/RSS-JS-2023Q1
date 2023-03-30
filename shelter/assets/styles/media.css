@@ -55,7 +55,8 @@
     margin-bottom: 53px;
   }
 
-  .our-friends-block .cards > .card:last-child {
+  .our-friends-block .cards > .card:last-child,
+  .pets-page .cards > .card:nth-child(7) {
     display: none;
   }
 
@@ -67,6 +68,19 @@
 
   .our-friends-block .card-title {
     margin-top: 29px;
+  }
+
+  .pets-page {
+    padding-bottom: 75px;
+  }
+  
+  .pets-page .content-title {
+    margin-bottom: 30px;
+  }
+
+  .pets-page .cards {
+    justify-content: center;
+    margin-bottom: 10px;
   }
 
   .help-block {
