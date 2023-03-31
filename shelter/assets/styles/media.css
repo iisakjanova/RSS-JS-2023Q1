@@ -73,7 +73,7 @@
   .pets-page {
     padding-bottom: 75px;
   }
-  
+
   .pets-page .content-title {
     margin-bottom: 30px;
   }
@@ -143,5 +143,210 @@
   .footer-content .content-title {
     margin-top: 0;
     margin-bottom: 33px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .container {
+    max-width: 320px;
+    padding: 0 10px;
+  }
+
+  .header .logo {
+    margin-left: 10px;
+  }
+
+  .header .main-nav {
+    display: none;
+  }
+
+  .burger {
+    display: flex;
+    margin-right: 10px;
+  }
+
+  .start-screen-content .content {
+    width: 100%;
+    text-align: center;
+  }
+
+  .start-screen-content .content-title,
+  .about-block .content-title,
+  .our-friends-block .content-title,
+  .help-block .content-title,
+  .in-addition-block .content-title,
+  .footer .content-title {
+    font-size: 25px;
+    letter-spacing: 1.5px;
+    text-align: center;
+  }
+
+  .start-screen-content .picture {
+    width: 88%;
+    margin-left: 12%;
+  }
+
+  .about-block {
+    padding-top: 28px;
+    margin-bottom: 43px;
+  }
+
+  .about-block .about-content {
+    width: 100%;
+    text-align: justify;
+    padding: 0 15px;
+    margin-bottom: 20px;
+  }
+
+  .about-block .content-paragraph {
+    margin-bottom: 20px;
+  }
+
+  .about-block .about-picture {
+    width: 87%;
+  }
+
+  .about-block .about-picture img {
+    width: 100%;
+  }
+
+  .our-friends-block {
+    padding-bottom: 41px;
+  }
+
+  .our-friends-block .content-title {
+    margin-top: 42px;
+    margin-bottom: 42px;
+  }
+
+  .our-friends-block .cards {
+    margin-bottom: 53px;
+  }
+
+  .our-friends-block .card {
+    width: 90%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .our-friends-block .cards > .card:nth-child(4) {
+    display: none;
+  }
+
+  .our-friends-block .card-title {
+    margin-top: 24px;
+  }
+
+  .our-friends-block .small-btn {
+    top: calc(100% - 80px/2);
+  }
+
+  .our-friends-block .left-btn {
+    left: 20%;
+  }
+
+  .our-friends-block .right-btn {
+    right: 20%;
+  }
+
+  .help-block {
+    padding-top: 42px;
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 12px;
+  }
+
+  .help-block .content-title {
+    margin-bottom: 40px;
+  }
+
+  .help-block .icon {
+    font-size: 15px;
+    width: 130px;
+    background-size: 50px;
+    padding-top: 71px;
+    margin-left: -5px;
+    margin-right: -5px;
+    margin-bottom: 29px;
+  }
+
+  .in-addition-block {
+    padding-top: 42px;
+    padding-bottom: 43px;
+  }
+
+  .in-addition-block-inner .in-addition-content {
+    margin-bottom: 33px;
+  }
+
+  .in-addition-block .content-title {
+    margin-bottom: 22px;
+  }
+
+  .in-addition-content .content-subtitle{
+    text-align: center;
+    letter-spacing: normal;
+    margin-bottom: 36px;
+  }
+
+  .in-addition-content .credit-card-number {
+    font-size: 15px;
+    margin-right: 0;
+    word-spacing: normal;
+    display: inline;
+    margin-left: 8px;
+  }
+
+  .in-addition-content .content-paragraph {
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: justify;
+  }
+
+  .in-addition-block-inner .in-addition-picture {
+    width: 86%;
+    padding-top: 0;
+  }
+
+  .footer {
+    padding-top: 30px;
+  }
+
+  .footer-inner {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .footer-inner .footer-content {
+    width: 100%;
+  }
+
+  .footer-inner .footer-content:first-child {
+    margin-bottom: 6px;
+  }
+
+  .footer-content a {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .footer-content span {
+    display: block;
+  }
+
+  .footer-inner .footer-content:last-child {
+    margin-top: 0;
+    width: 86%;
+  }
+
+  .footer-content:nth-child(2) .link {
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 321px) {
+  .footer-inner {
+    margin-left: 0;
+    margin-right: 0;
   }
 }
