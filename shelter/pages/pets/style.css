@@ -28,7 +28,7 @@
 
 .main-nav a:focus,
 .main-nav a:active,
-.focus {
+.pets-header .focus {
   outline: none;
   border-bottom: 3px solid #F1CDB3;
   color: #545454;
