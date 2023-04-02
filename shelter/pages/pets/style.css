@@ -27,7 +27,8 @@
 }
 
 .main-nav a:focus,
-.main-nav a:active {
+.main-nav a:active,
+.focus {
   outline: none;
   border-bottom: 3px solid #F1CDB3;
   color: #545454;
@@ -35,6 +36,10 @@
 
 .main-nav a:hover {
   color: #292929;
+}
+
+.pets-header .burger .burger-line {
+  border-top-color: #000000;
 }
 
 .our-friends-block {

@@ -89,7 +89,8 @@ body p {
 }
 
 .main-nav a:focus,
-.main-nav a:active {
+.main-nav a:active,
+.main-nav .focus {
     outline: none;
     color: #FAFAFA;
     border-bottom: 3px solid #F1CDB3;
@@ -506,4 +507,8 @@ body p {
     width: 100%;
     height: auto;
     padding-top: 20px;
+}
+
+.footer .footer-content:nth-child(2) .link:nth-child(2)::before {
+    top: 7px;
 }
