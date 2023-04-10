@@ -44,7 +44,7 @@ const popupSubtitle = document.querySelector('.popup-subtitle');
 const popupList = document.querySelector('.popup-list');
 const body = document.querySelector('body');
 
-fetch('../../assets/pets.json')
+fetch('../../../shelter/assets/pets.json')
   .then(response => response.json())
   .then(data => {
     cards.forEach((card) => {
