@@ -44,7 +44,7 @@ const popupSubtitle = document.querySelector('.popup-subtitle');
 const popupList = document.querySelector('.popup-list');
 const body = document.querySelector('body');
 
-fetch('../../../shelter/assets/pets.json')
+fetch('https://rolling-scopes-school.github.io/iisakjanova-JSFE2023Q1/shelter/assets/pets.json')
   .then(response => response.json())
   .then(data => {
     cards.forEach((card) => {
