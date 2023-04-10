@@ -112,6 +112,7 @@ body p {
     width: 30px;
     height: 2px;
 }
+
 .start-screen-content {
     display: flex;
     margin-top: 97px;
@@ -511,4 +512,108 @@ body p {
 
 .footer .footer-content:nth-child(2) .link:nth-child(2)::before {
     top: 7px;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(41, 41, 41, 0.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup {
+    background: #FAFAFA;
+    padding: 0px 20px 0px 0px;
+    border-radius: 9px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    width: 83%;
+    max-width: 900px;
+    height: 500px;
+    position: relative;
+    display: flex;
+}
+
+.popup-image-wrapper {
+    width: 65%;
+    max-width: 500px;
+    height: auto;
+}
+
+.popup-image {
+    width: 100%;
+}
+
+.popup-content {
+    color: #000000;
+    letter-spacing: 0.06em;
+    font-weight: 400;
+    width: 50%;
+    padding-top: 48px;
+    padding-left: 34px;
+}
+
+.close-btn {
+    width: 52px;
+    height: 52px;
+    position: absolute;
+    top: -44px;
+    right: -41px;
+    cursor: pointer;
+    border: 2px solid #F1CDB3;
+    border-radius: 50%;
+    background-color: transparent;
+}
+
+.close-btn:hover {
+    background-color: #FDDCC4;
+}
+
+.popup-title {
+    font-size: 35px;
+    font-weight: 400;
+    line-height: 130%;
+    margin-top: 0;
+    letter-spacing: 2px;
+    margin-bottom: 9px;
+}
+
+.popup-subtitle {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 115%;
+    margin-top: 0;
+    letter-spacing: 1.5px;
+    margin-bottom: 42px;
+}
+
+.popup-description {
+    font-size: 15px;
+    line-height: 110%;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin-top: 0;
+    margin-bottom: 42px;
+}
+
+.popup-list {
+    font-size: 15px;
+    line-height: 110%;
+    padding: 0 0 0 15px;
+    margin-top: 0;
+}
+
+.popup-list li {
+    margin-bottom: 12px;
+}
+
+.popup-list ::marker {
+    color: #F1CDB3;
+}
+
+body.overlay-open {
+    overflow: hidden!important;
 }

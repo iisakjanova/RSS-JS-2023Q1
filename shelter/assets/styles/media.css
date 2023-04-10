@@ -147,6 +147,34 @@
     margin-top: 0;
     margin-bottom: 33px;
   }
+
+  .popup {
+    max-width: 630px;
+    height: 350px;
+  }
+
+  .popup-content {
+    padding-top: 12px;
+    padding-left: 16px;
+  }
+
+  .popup-subtitle {
+    margin-bottom: 19px;
+  }
+
+  .popup-description {
+    font-size: 13px;
+    margin-bottom: 19px;
+  }
+
+  .popup-list li {
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+
+  .close-btn {
+    top: -52px;
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -160,14 +188,68 @@
   }
 
   .header .main-nav {
-    display: none;
+    display: flex;
   }
 
+  .header nav {
+    transition: opacity 5s ease-in-out, transform 5s ease-in-out;
+    opacity: 0;
+    transform: translateX(50px);
+    visibility: hidden;
+    overflow: hidden;
+  }
+  
   .burger {
     display: flex;
     margin-right: 10px;
+    z-index: 100;
   }
 
+  .header nav.show {
+    opacity: 1;
+    transform: translateX(0);
+    visibility: visible;
+    display: block;
+    width: 320px;
+    background-color: #292929;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    padding: 10px;
+    z-index: 100;
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
+  }
+
+  .pets-header nav.show {
+    background-color: #FFFFFF;
+  }
+
+  .header .burger.burger-active {
+    position: absolute;
+    top: 48px;
+    right: 11px;
+    transform: rotate(90deg);
+    transition: all 5s;
+  }
+
+  .header nav.show ul {
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    padding-top: 175px;
+  }
+
+  .header nav.show li {
+    padding-bottom: 41px;
+    padding-left: 0;
+  }
+
+  .header nav.show a {
+    font-size: 32px;
+  }
+  
   .start-screen-content .content {
     width: 100%;
     text-align: center;
@@ -315,11 +397,6 @@
     padding-top: 30px;
   }
 
-  /* .footer-inner {
-    margin-left: auto;
-    margin-right: auto;
-  } */
-
   .footer-inner .footer-content {
     width: 100%;
   }
@@ -384,6 +461,38 @@
 
   .footer .footer-content:nth-child(2) a:nth-child(3) {
     margin-bottom: 27px; 
+  }
+
+  .popup-image-wrapper {
+    display: none;
+  }
+
+  .popup {
+    max-width: 240px;
+    height: auto;
+    padding: 10px;
+  }
+
+  .popup-content {
+    width: 100%;
+    padding: 0;
+  }
+  .popup-title,
+  .popup-subtitle {
+    text-align: center;
+  }
+
+  .popup-description {
+    margin-bottom: 23px;
+    text-align: justify;
+  }
+
+  .popup-list {
+    margin-bottom: 0;
+  }
+
+  .close-btn {
+    right: -30px;
   }
 }
 
