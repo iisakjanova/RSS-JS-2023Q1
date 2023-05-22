@@ -1,7 +1,10 @@
 import './style.css';
+import clickSoundSrc from '../assets/computer-mouse-click.mp3';
+import endGameSoundSrc from '../assets/game_over.wav';
+import winGameSoundSrc from '../assets/win-sound.wav';
 
 export default class Minesweeper {
-  constructor(container, rows, cols, mines) {
+  constructor(container, rows, cols, mines, soundOn) {
     this.container = container;
     this.counter = 0;
     this.duration = 0;
@@ -12,6 +15,7 @@ export default class Minesweeper {
     this.openedCells = 0;
     this.flaggedMines = 0;
     this.minesRemaining = mines;
+    this.soundOn = soundOn;
   }
 
   generateBoardData = () => {
@@ -252,7 +256,43 @@ export default class Minesweeper {
 
     const messageColor = this.success ? 'green' : 'red';
     this.showMessage(message, messageColor);
+
+    if (this.soundOn) {
+      const endGameSound = new Audio(endGameSoundSrc);
+      const winGameSound = new Audio(winGameSoundSrc);
+
+      if (this.success) {
+        winGameSound.play();
+      } else {
+        endGameSound.play();
+      }
+    }
+
+    let gameResult = this.success ? 'WIN' : 'LOSE';
+
+    const result = {
+      moves: this.counter,
+      time: `${this.duration} sec`,
+      date: new Date().toISOString(),
+      result: gameResult,
+    };
+
+    this.saveResult(result);
   }
+
+  saveResult = (result) => {
+    // Retrieve existing results from localStorage
+    const results = JSON.parse(localStorage.getItem('results')) || [];
+  
+    // Add the new result to the array
+    results.unshift(result);
+  
+    // Truncate the array to keep only the latest 10 results
+    results.length = Math.min(results.length, 10);
+  
+    // Save the updated results array to localStorage
+    localStorage.setItem('results', JSON.stringify(results));
+  };
 
   render = () => {
     this.board = document.createElement('div');
@@ -309,26 +349,20 @@ export default class Minesweeper {
         cell.setAttribute('data-row', i);
         cell.setAttribute('data-col', j);
         row.append(cell);
-
-        // if (this.mode === 'dark') {
-        //   cell.style.setProperty('background', 'radial-gradient(circle at center, #0000CD, #000080)');
-
-        //   cell.addEventListener('mouseover', () => {
-        //     cell.style.setProperty('background', 'radial-gradient(circle at center, #000080, #0000CD)');
-        //   });
-          
-        //   cell.addEventListener('mouseout', () => {
-        //     cell.style.setProperty('background', 'radial-gradient(circle at center, #0000CD, #000080)');
-        //   });
-        // }
       }
 
       this.board.append(row);
     }
 
     this.container.append(this.board);
-
+    
     this.board.addEventListener('click', (event) => {
+      if (this.soundOn) {
+        const clickSound = new Audio(clickSoundSrc);
+        clickSound.currentTime = 0;
+        clickSound.play();
+      }
+      
       const cell = event.target;
 
       const { row, col, mine } = cell.dataset;
@@ -355,6 +389,12 @@ export default class Minesweeper {
       const cellsFlaggedEl = document.querySelector('.flagged-cells');
       const minesRemainingEl = document.querySelector('.mines-remaining');
 
+      if (this.soundOn) {
+        const clickSound = new Audio(clickSoundSrc);
+        clickSound.currentTime = 0;
+        clickSound.play();
+      }
+      
       const cell = event.target;
       
         if (!cell.disabled) {
