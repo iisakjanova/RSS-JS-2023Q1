@@ -1,15 +1,17 @@
 import './style.css';
 
 export default class Minesweeper {
-  constructor(container, rows, cols) {
+  constructor(container, rows, cols, mines) {
     this.container = container;
     this.counter = 0;
     this.duration = 0;
     this.boardData = [];
     this.rows = rows;
     this.cols = cols;
+    this.minesQty = mines;
     this.openedCells = 0;
     this.flaggedMines = 0;
+    this.minesRemaining = mines;
   }
 
   generateBoardData = () => {
@@ -29,10 +31,9 @@ export default class Minesweeper {
   }
 
   addMinesToBoardData = (firstMoveRow, firstMoveCol) => {
-    const numMines = Math.floor(this.rows * this.cols * 0.1);
     let minesPlaced = 0;
 
-    while (minesPlaced < numMines) {
+    while (minesPlaced < this.minesQty) {
       const randomRow = Math.floor(Math.random() * this.rows);
       const randomCol = Math.floor(Math.random() * this.cols);
 
@@ -68,6 +69,10 @@ export default class Minesweeper {
   }
 
   openCellIfEmpty = (rowStr, colStr) => {
+    if (isNaN(rowStr) || isNaN(colStr)) {
+      return;
+    }
+    
     const row = Number(rowStr);
     const col = Number(colStr);
 
@@ -75,27 +80,34 @@ export default class Minesweeper {
       return;
     }
 
-    if (col < 0 || col > this.boardData[row].length - 1) {
+    if (col < 0 || col > this.boardData[row]?.length - 1) {
       return;
     }
 
-    if (this.boardData[row][col] === 1) {
+    if (this.boardData[row] && this.boardData[row][col] === 1) {
       return;
     }
 
     const cell = document.querySelector(`[data-row="${row}"][data-col="${col}"]`);
-    const isOpen = cell.disabled;
+    const isOpen = cell && cell.disabled;
+
+    if (cell.dataset.mine) {
+      return;
+    }
 
     if (isOpen) {
       return;
     }
+
     const result = this.checkCell(row, col);
 
     if (result === 'mine') {
       return;
     }
 
-    this.openCell(cell, result);
+    if (cell && cell.classList.contains('cell')) {
+      this.openCell(cell, result);
+    }
 
     if (result === 0) {
       this.openCellIfEmpty(row - 1, col);
@@ -112,9 +124,11 @@ export default class Minesweeper {
   }
 
   openCell = (cell, result) => {
-    cell.classList.add('opened');
-
-    if (!cell.disabled) {
+    if (cell) {
+      cell.classList.add('opened');
+    }
+    
+    if (!cell?.disabled) {
       this.openedCells++;
     }
     
@@ -130,7 +144,9 @@ export default class Minesweeper {
       cell.innerHTML = '';
     }
 
-    if (result !== 'mine' && this.openedCells === (this.boardData[0].length * this.boardData.length - 10)) {
+    const cellsQtyToOpen = this.boardData[0].length * this.boardData.length - this.minesQty;
+
+    if (result !== 'mine' && this.openedCells === cellsQtyToOpen) {
       this.success = true;
       this.revealBoard();
       this.endGame();
@@ -163,7 +179,7 @@ export default class Minesweeper {
       case 1: 
         return 'blue';
       case 2: 
-        return 'green';
+        return 'yellow';
       case 3:
         return 'darkgoldenrod';
       case 4:
@@ -216,9 +232,10 @@ export default class Minesweeper {
     }
   }
 
-  showMessage = (text) => {
+  showMessage = (text, color) => {
     const message = document.querySelector('.message');
     message.innerText = text;
+    message.style.setProperty('color', color);
   }
 
   endGame = () => {
@@ -230,38 +247,83 @@ export default class Minesweeper {
 
     clearInterval(this.interval);
     const message = this.success ? 
-      `Hooray! You found all mines in ${this.duration} seconds and ${this.counter} moves!` : 
+      `Hooray! You found all mines in \n${this.duration} seconds and ${this.counter} moves!` : 
       'Game over. Try again.';
-    this.showMessage(message);
+
+    const messageColor = this.success ? 'green' : 'red';
+    this.showMessage(message, messageColor);
   }
 
   render = () => {
     this.board = document.createElement('div');
     this.board.className = 'board';
 
-    const counter = document.createElement('p');
-    counter.className = 'counter';
-    counter.innerText = `Moves: ${this.counter}`;
-    this.container.append(counter);
+    const maxWidth = `${(this.rows * 50).toString()}px`;
+    this.container.style.setProperty('max-width', maxWidth);
+  
+    const infoEl = document.createElement('div');
+    infoEl.className = 'info';
+    this.container.append(infoEl);
 
-    const durationEl = document.createElement('p');
-    durationEl.className = 'duration';
-    durationEl.innerText = 'Duration: 0';
-    this.container.append(durationEl);
+    const gameStatLeftCol = document.createElement('div');
+    gameStatLeftCol.className = 'game-stat-col';
+    infoEl.append(gameStatLeftCol);
+
+    const cellsFlagged = document.createElement('p');
+    cellsFlagged.className = 'flagged-cells';
+    cellsFlagged.innerText = `Cells flagged: ${this.flaggedMines}`;
+    gameStatLeftCol.append(cellsFlagged);
+
+    const minesRemainingEl = document.createElement('p');
+    minesRemainingEl.className = 'mines-remaining';
+    minesRemainingEl.innerText = `Mines remaining: ${this.minesRemaining}`;
+    gameStatLeftCol.append(minesRemainingEl);
 
     const message = document.createElement('p');
     message.className = 'message';
     message.innerText = '';
-    this.container.prepend(message);
+
+    infoEl.append(message);
+
+    const gameStatRightCol = document.createElement('div');
+    gameStatRightCol.className = 'game-stat-col';
+    infoEl.append(gameStatRightCol);
+
+    const counter = document.createElement('p');
+    counter.className = 'counter';
+    counter.innerText = `Moves: ${this.counter}`;
+    gameStatRightCol.append(counter);
+
+    const durationEl = document.createElement('p');
+    durationEl.className = 'duration';
+    durationEl.innerText = 'Duration: 0';
+    gameStatRightCol.append(durationEl);
 
     for (let i = 0; i < this.boardData.length; i++) {
+      const row = document.createElement('div');
+      row.className = 'row';
+
       for (let j = 0; j < this.boardData[i].length; j++) {
         const cell = document.createElement('button');
         cell.className = 'cell';
         cell.setAttribute('data-row', i);
         cell.setAttribute('data-col', j);
-        this.board.append(cell);
+        row.append(cell);
+
+        // if (this.mode === 'dark') {
+        //   cell.style.setProperty('background', 'radial-gradient(circle at center, #0000CD, #000080)');
+
+        //   cell.addEventListener('mouseover', () => {
+        //     cell.style.setProperty('background', 'radial-gradient(circle at center, #000080, #0000CD)');
+        //   });
+          
+        //   cell.addEventListener('mouseout', () => {
+        //     cell.style.setProperty('background', 'radial-gradient(circle at center, #0000CD, #000080)');
+        //   });
+        // }
       }
+
+      this.board.append(row);
     }
 
     this.container.append(this.board);
@@ -269,11 +331,18 @@ export default class Minesweeper {
     this.board.addEventListener('click', (event) => {
       const cell = event.target;
 
-      const { row, col } = cell.dataset;
+      const { row, col, mine } = cell.dataset;
+
+      if (mine) {
+        return;
+      }
+
       const result = this.makeMove(row, col);
 
-      this.openCell(cell, result);
-
+      if (cell && cell.classList.contains('cell')) {
+        this.openCell(cell, result);
+      }
+      
       if (result === 'mine') {
         this.success = false;
         this.endGame();
@@ -283,6 +352,9 @@ export default class Minesweeper {
 
     this.board.addEventListener('contextmenu', (event) => {
       event.preventDefault();
+      const cellsFlaggedEl = document.querySelector('.flagged-cells');
+      const minesRemainingEl = document.querySelector('.mines-remaining');
+
       const cell = event.target;
       
         if (!cell.disabled) {
@@ -290,11 +362,17 @@ export default class Minesweeper {
             cell.removeAttribute('data-mine');
             cell.innerHTML = '';
             this.flaggedMines--;
-          } else if (this.flaggedMines < 10) {
+            this.minesRemaining++;
+
+          } else if (this.flaggedMines < this.minesQty) {
             cell.setAttribute('data-mine', true);
             cell.innerHTML = '&#x1F6A9;';
             this.flaggedMines++;
+            this.minesRemaining--;
           }
+
+          minesRemainingEl.innerText = `Mines remaining: ${this.minesRemaining}`;
+          cellsFlaggedEl.innerText = `Cells flagged: ${this.flaggedMines}`;
         }
     });
   }
