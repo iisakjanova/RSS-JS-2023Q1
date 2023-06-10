@@ -32,12 +32,13 @@ class News {
 
       if (idx % 2) newsClone.querySelector('.news__item')?.classList.add('alt');
 
-      const element: HTMLElement | null = newsClone.querySelector(
+      const metaPhotoElement: HTMLElement | null = newsClone.querySelector(
         '.news__meta-photo',
       );
-      if (element) {
-        element.style.backgroundImage = `url(${
-          item.urlToImage || 'img/news_placeholder.jpg'
+
+      if (metaPhotoElement) {
+        metaPhotoElement.style.backgroundImage = `url(${
+          item.urlToImage ?? 'img/news_placeholder.jpg'
         })`;
       }
 
@@ -91,16 +92,6 @@ class News {
 
       if (readMoreLink) {
         readMoreLink.setAttribute('href', item.url);
-      }
-
-      const metaPhotoElement: HTMLElement | null = newsClone.querySelector(
-        '.news__meta-photo',
-      );
-
-      if (metaPhotoElement) {
-        metaPhotoElement.style.backgroundImage = `url(${
-          item.urlToImage ?? 'img/news_placeholder.jpg'
-        })`;
       }
 
       fragment.append(newsClone);
