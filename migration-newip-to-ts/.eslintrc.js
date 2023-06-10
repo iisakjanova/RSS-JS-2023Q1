@@ -27,5 +27,8 @@ module.exports = {
     'import/extentions': 'off',
     'prettier/prettier': 'error',
     '@typescript-eslint/no-explicit-any': 'error',
+    'class-methods-use-this': ['error', {
+      'exceptMethods': ['draw']
+    }]
   },
 };
