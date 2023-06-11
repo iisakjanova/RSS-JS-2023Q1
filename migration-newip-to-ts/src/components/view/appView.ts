@@ -1,11 +1,11 @@
 import News, { NewsDataType } from './news/news';
 import Sources, { SourcesDataType } from './sources/sources';
 
-type DrawNewsDataType = {
+export type DrawNewsDataType = {
   articles: NewsDataType[];
 };
 
-type DrawSourcesDataType = {
+export type DrawSourcesDataType = {
   sources: SourcesDataType[];
 };
 
@@ -19,12 +19,12 @@ export class AppView {
     this.sources = new Sources();
   }
 
-  public drawNews(data: DrawNewsDataType) {
+  public drawNews(data?: DrawNewsDataType) {
     const values: NewsDataType[] = data?.articles ? data?.articles : [];
     this.news.draw(values);
   }
 
-  public drawSources(data: DrawSourcesDataType) {
+  public drawSources(data?: DrawSourcesDataType) {
     const values: SourcesDataType[] = data?.sources ? data?.sources : [];
     this.sources.draw(values);
   }
