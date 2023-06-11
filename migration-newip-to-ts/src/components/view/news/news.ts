@@ -1,6 +1,6 @@
 import './news.css';
 
-type NewsDataType = {
+export type NewsDataType = {
   title: string;
   name: string;
   description: string;

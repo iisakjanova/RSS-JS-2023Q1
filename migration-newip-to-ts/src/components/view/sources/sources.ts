@@ -1,6 +1,6 @@
 import './sources.css';
 
-type SourcesDataType = {
+export type SourcesDataType = {
   id: string;
   name: string;
 };
