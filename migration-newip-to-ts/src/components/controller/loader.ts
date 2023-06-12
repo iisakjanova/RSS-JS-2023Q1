@@ -10,7 +10,18 @@ export type LoadResponse<Type> = {
 
 export type LoadCallback<Type> = (data?: LoadResponse<Type>) => void;
 
-class Loader {
+type LoaderOptions = {
+  method: string;
+  endpoint: string;
+  callback?: () => void;
+  options?: OptionsType;
+};
+
+interface ILoader {
+  getResp({ endpoint, options }: LoaderOptions, callback?: () => void): void;
+}
+
+class Loader implements ILoader {
   baseLink: string;
 
   options: OptionsType;

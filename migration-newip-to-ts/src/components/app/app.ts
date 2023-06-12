@@ -4,7 +4,11 @@ import AppController from '../controller/controller';
 import { AppView } from '../view/appView';
 import { LoadResponse } from '../controller/loader';
 
-class App {
+interface IApp {
+  start(): void;
+}
+
+class App implements IApp {
   controller: AppController;
 
   sourcesData?: LoadResponse<SourcesDataType>;

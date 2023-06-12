@@ -3,7 +3,12 @@ import { Endpoint } from '../../constants';
 import { LoadCallback } from './loader';
 import { NewsDataType, SourcesDataType } from '../../types';
 
-class AppController extends AppLoader {
+interface IAppController {
+  getSources(callback: LoadCallback<SourcesDataType>): void;
+  getNews(e: Event, callback: LoadCallback<NewsDataType>): void;
+}
+
+class AppController extends AppLoader implements IAppController {
   public getSources(callback: LoadCallback<SourcesDataType>) {
     super.getResp(
       {
