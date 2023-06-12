@@ -29,9 +29,10 @@ class App {
       );
     }
 
-    this.controller.getSources((data?: DrawSourcesDataType) =>
-      this.view.drawSources(data),
-    );
+    this.controller.getSources((data?: DrawSourcesDataType) => {
+      this.view.drawSources(data);
+      this.view.drawLetters(data);
+    });
   }
 }
 

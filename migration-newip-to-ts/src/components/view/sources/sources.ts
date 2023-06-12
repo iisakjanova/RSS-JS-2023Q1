@@ -25,6 +25,8 @@ class Sources {
         '.source__item-name',
       );
 
+      console.log(itemNameElement);
+
       if (itemNameElement) {
         itemNameElement.textContent = item.name;
       }
@@ -48,6 +50,13 @@ class Sources {
       sourcesContainer.innerHTML = '';
       sourcesContainer.append(fragment);
     }
+  }
+
+  filterByAlphabet(letter: string, data: SourcesDataType[]) {
+    const filteredData = data.filter((item) =>
+      item.name.startsWith(letter.toUpperCase()),
+    );
+    this.draw(filteredData);
   }
 }
 

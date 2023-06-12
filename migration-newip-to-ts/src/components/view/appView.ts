@@ -1,5 +1,6 @@
 import News, { NewsDataType } from './news/news';
 import Sources, { SourcesDataType } from './sources/sources';
+import Letters from './letters/letters';
 
 export type DrawNewsDataType = {
   articles: NewsDataType[];
@@ -14,9 +15,12 @@ export class AppView {
 
   sources: Sources;
 
+  letters: Letters;
+
   constructor() {
     this.news = new News();
     this.sources = new Sources();
+    this.letters = new Letters();
   }
 
   public drawNews(data?: DrawNewsDataType) {
@@ -27,6 +31,13 @@ export class AppView {
   public drawSources(data?: DrawSourcesDataType) {
     const values: SourcesDataType[] = data?.sources ? data?.sources : [];
     this.sources.draw(values);
+
+    const sources = this.sources;
+    sources.filterByAlphabet('A', values);
+  }
+
+  public drawLetters(sourcesData?: DrawSourcesDataType) {
+    this.letters.draw(sourcesData?.sources);
   }
 }
 
