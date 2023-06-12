@@ -1,13 +1,13 @@
+import { NewsDataType, SourcesDataType } from '../../types';
 import AppController from '../controller/controller';
 
-import {
-  AppView,
-  DrawNewsDataType,
-  DrawSourcesDataType,
-} from '../view/appView';
+import { AppView } from '../view/appView';
+import { LoadResponse } from '../controller/loader';
 
 class App {
   controller: AppController;
+
+  sourcesData?: LoadResponse<SourcesDataType>;
 
   view: AppView;
 
@@ -16,22 +16,26 @@ class App {
     this.view = new AppView();
   }
 
-  start() {
+  public start() {
     const sourcesElement: HTMLElement | null = document.querySelector(
       '.sources',
     );
 
     if (sourcesElement !== null) {
       sourcesElement.addEventListener('click', (e: Event) =>
-        this.controller.getNews(e, (data?: DrawNewsDataType) =>
+        this.controller.getNews(e, (data?: LoadResponse<NewsDataType>) =>
           this.view.drawNews(data),
         ),
       );
     }
 
-    this.controller.getSources((data?: DrawSourcesDataType) => {
+    this.controller.getSources((data?: LoadResponse<SourcesDataType>) => {
+      this.sourcesData = data;
       this.view.drawSources(data);
-      this.view.drawLetters(data);
+    });
+
+    this.view.drawLetters((letter: string) => {
+      this.view.drawSources(this.sourcesData, letter);
     });
   }
 }

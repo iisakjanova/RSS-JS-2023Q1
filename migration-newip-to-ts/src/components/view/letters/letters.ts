@@ -1,22 +1,25 @@
 import './letters.css';
-import Sources, { SourcesDataType } from '../sources/sources';
+import { LetterClickType } from '../../../types';
+import { Alphabet } from '../../../constants';
 
-enum Alphabet {
-  A = 'A',
-  B = 'B',
-  C = 'C',
+interface ILetters {
+  draw(onLetterClick: LetterClickType): void;
 }
 
-class Letters {
-  draw(sourcesData?: SourcesDataType[]) {
-    const alphabetContainer = document.querySelector('.letters');
+class Letters implements ILetters {
+  public draw(onLetterClick: LetterClickType) {
+    const alphabetContainer: Element | null = document.querySelector(
+      '.letters',
+    );
 
     if (!alphabetContainer) {
       throw new Error('.letters container not found');
     }
 
-    const fragment = document.createDocumentFragment();
-    const letterItemTemp = document.querySelector('#letterItemTemp');
+    const fragment: DocumentFragment = document.createDocumentFragment();
+    const letterItemTemp: Element | null = document.querySelector(
+      '#letterItemTemp',
+    );
 
     if (!(letterItemTemp instanceof HTMLTemplateElement)) {
       throw new Error('#letterItemTemp template not found');
@@ -27,16 +30,15 @@ class Letters {
         true,
       ) as DocumentFragment;
 
-      const letterElement = letterClone.querySelector('.letter__item');
+      const letterElement: Element | null = letterClone.querySelector(
+        '.letter__item',
+      );
       if (letterElement) {
-        letterElement.addEventListener('click', () => {
-          if (sourcesData) {
-            const sources = new Sources();
-            sources.filterByAlphabet(letter, sourcesData);
-          }
-        });
+        letterElement.addEventListener('click', () => onLetterClick(letter));
       }
-      const letterTextElement = letterClone.querySelector('.letter__item-text');
+      const letterTextElement: Element | null = letterClone.querySelector(
+        '.letter__item-text',
+      );
 
       if (letterTextElement) {
         letterTextElement.textContent = letter;

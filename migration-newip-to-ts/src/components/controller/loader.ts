@@ -4,11 +4,11 @@ type OptionsType = {
   [key: string]: string;
 };
 
-type LoadResponse = {
-  [key: string]: string;
+export type LoadResponse<Type> = {
+  [key: string]: Type[];
 };
 
-type LoadCallback = (data?: LoadResponse) => void;
+export type LoadCallback<Type> = (data?: LoadResponse<Type>) => void;
 
 class Loader {
   baseLink: string;
@@ -52,16 +52,16 @@ class Loader {
     return url.slice(0, -1);
   }
 
-  private load(
+  private load<Type>(
     method: string,
     endpoint: string,
-    callback: LoadCallback,
+    callback: LoadCallback<Type>,
     options: OptionsType = {},
   ) {
     fetch(this.makeUrl(options, endpoint), { method })
       .then(this.errorHandler)
       .then((res) => res.json())
-      .then((data: LoadResponse) => callback(data))
+      .then((data: LoadResponse<Type>) => callback(data))
       .catch((err) => console.error(err));
   }
 }

@@ -1,11 +1,10 @@
 import AppLoader from './appLoader';
-import { DrawNewsDataType, DrawSourcesDataType } from '../view/appView';
 import { Endpoint } from '../../constants';
-
-type CallbackType<Type> = (data?: Type) => void;
+import { LoadCallback } from './loader';
+import { NewsDataType, SourcesDataType } from '../../types';
 
 class AppController extends AppLoader {
-  public getSources(callback: CallbackType<DrawSourcesDataType>) {
+  public getSources(callback: LoadCallback<SourcesDataType>) {
     super.getResp(
       {
         endpoint: Endpoint.Sources,
@@ -14,7 +13,7 @@ class AppController extends AppLoader {
     );
   }
 
-  public getNews(e: Event, callback: CallbackType<DrawNewsDataType>) {
+  public getNews(e: Event, callback: LoadCallback<NewsDataType>) {
     let { target }: { target: EventTarget | null } = e;
     const newsContainer: EventTarget | null = e.currentTarget;
 

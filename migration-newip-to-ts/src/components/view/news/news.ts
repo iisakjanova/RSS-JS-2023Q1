@@ -1,20 +1,12 @@
 import './news.css';
+import { NewsDataType } from '../../../types';
 
-export type NewsDataType = {
-  title: string;
-  name: string;
-  description: string;
-  source: {
-    name: string;
-  };
-  author?: string;
-  url: string;
-  urlToImage?: string;
-  publishedAt: string;
-};
+interface INews {
+  draw(data: NewsDataType[]): void;
+}
 
-class News {
-  draw(data: NewsDataType[]) {
+class News implements INews {
+  public draw(data: NewsDataType[]) {
     const news: NewsDataType[] =
       data.length >= 10 ? data.filter((_item, idx) => idx < 10) : data;
 
