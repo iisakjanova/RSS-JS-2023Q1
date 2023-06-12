@@ -1,5 +1,6 @@
 import AppLoader from './appLoader';
 import { DrawNewsDataType, DrawSourcesDataType } from '../view/appView';
+import { Endpoint } from '../../constants';
 
 type CallbackType<Type> = (data?: Type) => void;
 
@@ -7,7 +8,7 @@ class AppController extends AppLoader {
   public getSources(callback: CallbackType<DrawSourcesDataType>) {
     super.getResp(
       {
-        endpoint: 'sources',
+        endpoint: Endpoint.Sources,
       },
       callback,
     );
@@ -36,7 +37,7 @@ class AppController extends AppLoader {
             newsContainer.setAttribute('data-source', sourceId);
             super.getResp(
               {
-                endpoint: 'everything',
+                endpoint: Endpoint.Everything,
                 options: {
                   sources: sourceId,
                 },

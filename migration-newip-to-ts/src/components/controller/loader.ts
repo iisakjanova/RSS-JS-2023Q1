@@ -1,3 +1,5 @@
+import { Status } from '../../constants';
+
 type OptionsType = {
   [key: string]: string;
 };
@@ -29,7 +31,7 @@ class Loader {
 
   private errorHandler(res: Response) {
     if (!res.ok) {
-      if (res.status === 401 || res.status === 404)
+      if (res.status === Status.Unauthorized || res.status === Status.NotFound)
         console.log(
           `Sorry, but there is ${res.status} error: ${res.statusText}`,
         );
