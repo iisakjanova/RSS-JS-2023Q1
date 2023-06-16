@@ -12,40 +12,37 @@ class Sources implements ISources {
       '#sourceItemTemp',
     );
 
-    data
-      .filter((item) => {
-        if (!letter) {
-          return true;
-        }
-        return item.name.startsWith(letter.toUpperCase());
-      })
-      .forEach((item: SourcesDataType) => {
-        const sourceClone: Node | undefined = sourceItemTemp?.content.cloneNode(
-          true,
-        );
+    data.forEach((item) => {
+      if (letter && !item.name.startsWith(letter.toUpperCase())) {
+        return;
+      }
 
-        if (!(sourceClone instanceof DocumentFragment)) {
-          throw new Error();
-        }
+      const sourceClone: Node | undefined = sourceItemTemp?.content.cloneNode(
+        true,
+      );
 
-        const itemNameElement: HTMLElement | null = sourceClone.querySelector(
-          '.source__item-name',
-        );
+      if (!(sourceClone instanceof DocumentFragment)) {
+        throw new Error();
+      }
 
-        if (itemNameElement) {
-          itemNameElement.textContent = item.name;
-        }
+      const itemNameElement: HTMLElement | null = sourceClone.querySelector(
+        '.source__item-name',
+      );
 
-        const itemElement: HTMLElement | null = sourceClone.querySelector(
-          '.source__item',
-        );
+      if (itemNameElement) {
+        itemNameElement.textContent = item.name;
+      }
 
-        if (itemElement) {
-          itemElement.setAttribute('data-source-id', item.id);
-        }
+      const itemElement: HTMLElement | null = sourceClone.querySelector(
+        '.source__item',
+      );
 
-        fragment.append(sourceClone);
-      });
+      if (itemElement) {
+        itemElement.setAttribute('data-source-id', item.id);
+      }
+
+      fragment.append(sourceClone);
+    });
 
     const sourcesContainer: HTMLElement | null = document.querySelector(
       '.sources',

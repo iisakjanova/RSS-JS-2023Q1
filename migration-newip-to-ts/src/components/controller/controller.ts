@@ -1,7 +1,7 @@
 import AppLoader from './appLoader';
 import { Endpoint } from '../../constants';
 import { LoadCallback } from './loader';
-import { NewsDataType, SourcesDataType } from '../../types';
+import type { NewsDataType, SourcesDataType } from '../../types';
 
 interface IAppController {
   getSources(callback: LoadCallback<SourcesDataType>): void;
@@ -19,8 +19,8 @@ class AppController extends AppLoader implements IAppController {
   }
 
   public getNews(e: Event, callback: LoadCallback<NewsDataType>) {
-    let { target }: { target: EventTarget | null } = e;
-    const newsContainer: EventTarget | null = e.currentTarget;
+    let { target } = e;
+    const newsContainer = e.currentTarget;
 
     while (target !== newsContainer) {
       if (!target) {

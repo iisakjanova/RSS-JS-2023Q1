@@ -24,14 +24,18 @@ export class AppView implements IAppView {
   }
 
   public drawNews(data?: LoadResponse<NewsDataType>) {
-    const values: NewsDataType[] = data?.articles ? data?.articles : [];
-    this.news.draw(values);
+    if (data) {
+      const values = data.articles ?? [];
+      this.news.draw(values);
+    }
   }
 
   public drawSources(data?: LoadResponse<SourcesDataType>, letter?: string) {
-    const values: SourcesDataType[] = data?.sources ? data?.sources : [];
-    const selectedLetter = letter || 'A';
-    this.sources.draw(values, selectedLetter);
+    if (data) {
+      const values = data.sources ?? [];
+      const selectedLetter = letter || 'A';
+      this.sources.draw(values, selectedLetter);
+    }
   }
 
   public drawLetters(onLetterClick: LetterClickType) {
