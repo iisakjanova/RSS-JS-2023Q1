@@ -1,0 +1,31 @@
+.css-editor {
+  display: flex;
+  width: 40%;
+  align-items: start;
+  border: 1px solid black;
+}
+
+.line-numbers {
+  margin: 0;
+  padding: 0 10px;
+  background: lightgray;
+  list-style: none;
+  text-align: end;
+  color: lightslategray;
+}
+
+.editor-input-form {
+  display: flex;
+  width: 100%;
+  padding: 0 10px;
+}
+
+.editor-input {
+  width: 90%;
+  background: aliceblue;
+  border-style: none;
+}
+
+.line-numbers-item {
+  font-size: 20px;
+}
