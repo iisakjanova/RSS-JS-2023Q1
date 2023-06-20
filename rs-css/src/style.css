@@ -1,8 +1,13 @@
-.css-editor {
+.editor-viewer-blocks-wrapper {
+  display: flex;
+}
+
+.css-editor,
+.html-viewer {
   display: flex;
   width: 40%;
   align-items: start;
-  border: 1px solid black;
+  border: 1px solid grey;
 }
 
 .line-numbers {
@@ -11,7 +16,7 @@
   background: lightgray;
   list-style: none;
   text-align: end;
-  color: lightslategray;
+  color: #a1a1a1;
 }
 
 .editor-input-form {
@@ -28,4 +33,29 @@
 
 .line-numbers-item {
   font-size: 20px;
+}
+
+.html-viewer {
+  background: grey;
+}
+
+.html-viewer > .line-numbers {
+  background: grey;
+}
+
+.layout {
+  padding: 0 10px;
+  font-size: 20px;
+}
+
+.layout div {
+  padding-left: 20px;
+}
+
+.layout > div {
+  padding-left: 0;
+}
+
+.hovered {
+  color: white;
 }
