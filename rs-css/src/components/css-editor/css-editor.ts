@@ -1,5 +1,7 @@
 import EditorViewerHeader from "../editor-viewer-header/editor-viewer-header";
 
+import "./css-editor.css";
+
 interface CssEditorInterface {
   render(): HTMLDivElement;
 }

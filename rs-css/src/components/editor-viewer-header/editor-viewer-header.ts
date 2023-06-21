@@ -1,3 +1,5 @@
+import "./editor-viewer-header.css";
+
 interface EditorViewerHeaderInterface {
   render(): HTMLDivElement;
 }

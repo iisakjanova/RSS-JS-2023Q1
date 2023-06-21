@@ -2,10 +2,7 @@
   display: flex;
 }
 
-.html-viewer-block {
-  width: 40%;
-}
-
+.html-viewer-block,
 .css-editor-block {
   width: 40%;
 }
@@ -26,52 +23,10 @@
   color: #a1a1a1;
 }
 
-.editor-input-form {
-  display: flex;
-  width: 100%;
-  padding: 0 10px;
-}
-
-.editor-input {
-  width: 90%;
-  background: aliceblue;
-  border-style: none;
-}
-
 .line-numbers-item {
   font-size: 20px;
 }
 
-.html-viewer {
-  background: grey;
-}
-
-.html-viewer > .line-numbers {
-  background: grey;
-}
-
-.layout {
-  padding: 0 10px;
-  font-size: 20px;
-}
-
-.layout div {
-  padding-left: 20px;
-}
-
-.layout > div {
-  padding-left: 0;
-}
-
 .hovered {
   color: white;
-}
-
-.editor-viewer-header {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-  background: rgba(0, 0, 0, 0.7);
-  font-size: 20px;
-  color: lightgray;
 }

@@ -1,25 +1,7 @@
 import EditorViewerHeader from "../editor-viewer-header/editor-viewer-header";
+import layoutCode from "../../constants";
 
-const code = {
-  tag: "div",
-  class: "table",
-  children: [
-    {
-      tag: "circle",
-      class: "big",
-      children: [
-        {
-          tag: "square",
-          class: "small",
-        },
-      ],
-    },
-    {
-      tag: "circle",
-      class: "big",
-    },
-  ],
-};
+import "./html-viewer.css";
 
 type CustomNodeType = {
   tag: string;
@@ -123,7 +105,7 @@ class HtmlViewer implements HtmlViewerInterface {
     const layoutElement = document.createElement("div");
     layoutElement.className = "layout";
 
-    layoutElement.appendChild(this.nodeToHtml(code));
+    layoutElement.appendChild(this.nodeToHtml(layoutCode));
 
     htmlViewer.append(layoutElement);
 
