@@ -2,10 +2,17 @@
   display: flex;
 }
 
+.html-viewer-block {
+  width: 40%;
+}
+
+.css-editor-block {
+  width: 40%;
+}
+
 .css-editor,
 .html-viewer {
   display: flex;
-  width: 40%;
   align-items: start;
   border: 1px solid grey;
 }
@@ -58,4 +65,13 @@
 
 .hovered {
   color: white;
+}
+
+.editor-viewer-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  font-size: 20px;
+  color: lightgray;
 }

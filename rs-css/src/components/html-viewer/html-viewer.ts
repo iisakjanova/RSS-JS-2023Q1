@@ -1,3 +1,5 @@
+import EditorViewerHeader from "../editor-viewer-header/editor-viewer-header";
+
 const code = {
   tag: "div",
   class: "table",
@@ -25,15 +27,15 @@ type CustomNodeType = {
   children?: CustomNodeType[];
 };
 
-interface HtmlViewer {
+interface HtmlViewerInterface {
   render(): HTMLDivElement;
 }
 
-class HtmlViewer {
-  htmlViewer: HTMLDivElement;
+class HtmlViewer implements HtmlViewerInterface {
+  htmlViewerBlock: HTMLDivElement;
 
   constructor() {
-    this.htmlViewer = document.createElement("div");
+    this.htmlViewerBlock = document.createElement("div");
   }
 
   private nodeToHtml(node: CustomNodeType) {
@@ -95,7 +97,15 @@ class HtmlViewer {
   }
 
   public render() {
-    this.htmlViewer.className = "html-viewer";
+    this.htmlViewerBlock.className = "html-viewer-block";
+
+    const header = new EditorViewerHeader("HTML Viewer", "table.html").render();
+    this.htmlViewerBlock.append(header);
+
+    const htmlViewer = document.createElement("div");
+    htmlViewer.className = "html-viewer";
+
+    this.htmlViewerBlock.append(htmlViewer);
 
     const lineNumbers = document.createElement("ul");
     lineNumbers.className = "line-numbers";
@@ -108,16 +118,16 @@ class HtmlViewer {
       lineNumbers.append(lineNumbersItem);
     }
 
-    this.htmlViewer.append(lineNumbers);
+    htmlViewer.append(lineNumbers);
 
     const layoutElement = document.createElement("div");
     layoutElement.className = "layout";
 
     layoutElement.appendChild(this.nodeToHtml(code));
 
-    this.htmlViewer.append(layoutElement);
+    htmlViewer.append(layoutElement);
 
-    return this.htmlViewer;
+    return this.htmlViewerBlock;
   }
 }
 

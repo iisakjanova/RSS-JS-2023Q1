@@ -1,16 +1,26 @@
-interface CssEditor {
+import EditorViewerHeader from "../editor-viewer-header/editor-viewer-header";
+
+interface CssEditorInterface {
   render(): HTMLDivElement;
 }
 
-class CssEditor {
-  cssEditor: HTMLDivElement;
+class CssEditor implements CssEditorInterface {
+  cssEditorBlock: HTMLDivElement;
 
   constructor() {
-    this.cssEditor = document.createElement("div");
+    this.cssEditorBlock = document.createElement("div");
   }
 
   public render() {
-    this.cssEditor.className = "css-editor";
+    this.cssEditorBlock.className = "css-editor-block";
+
+    const header = new EditorViewerHeader("CSS Editor", "style.css").render();
+    this.cssEditorBlock.append(header);
+
+    const cssEditor = document.createElement("div");
+    cssEditor.className = "css-editor";
+
+    this.cssEditorBlock.append(cssEditor);
 
     const lineNumbers = document.createElement("ul");
     lineNumbers.className = "line-numbers";
@@ -23,12 +33,12 @@ class CssEditor {
       lineNumbers.append(lineNumbersItem);
     }
 
-    this.cssEditor.append(lineNumbers);
+    cssEditor.append(lineNumbers);
 
     const editorInputFormElement = document.createElement("form");
     editorInputFormElement.className = "editor-input-form";
 
-    this.cssEditor.append(editorInputFormElement);
+    cssEditor.append(editorInputFormElement);
 
     const editorInputElement = document.createElement("input");
     editorInputElement.type = "text";
@@ -42,7 +52,7 @@ class CssEditor {
     editorInputFormElement.append(editorInputElement);
     editorInputFormElement.append(buttonElement);
 
-    return this.cssEditor;
+    return this.cssEditorBlock;
   }
 }
 
