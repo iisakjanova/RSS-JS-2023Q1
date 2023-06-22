@@ -1,0 +1,72 @@
+.table-block {
+  width: 80%;
+}
+
+.table {
+  display: flex;
+  margin: 30px auto;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 400px;
+  border-radius: 10px;
+  background: linear-gradient(#dd992d, #cd8c26);
+  transform: perspective(1000px) rotateX(25deg);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2), 0px 0px 20px rgba(0, 0, 0, 0.4),
+    0px 0px 30px rgba(0, 0, 0, 0.6);
+}
+
+circle {
+  display: flex;
+  margin: 20px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: linear-gradient(to bottom, #c0e2ff, #93c5ff);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2), 0px 0px 20px rgba(0, 0, 0, 0.4),
+    0px 0px 30px rgba(0, 0, 0, 0.6);
+}
+
+square {
+  display: flex;
+  margin: 20px;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom right, #f08080, #ff8c8c);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2), 0px 0px 20px rgba(0, 0, 0, 0.4),
+    0px 0px 30px rgba(0, 0, 0, 0.6);
+}
+
+ellipse {
+  display: flex;
+  margin: 20px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, #90ee90, #98fb98);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2), 0px 0px 20px rgba(0, 0, 0, 0.4),
+    0px 0px 30px rgba(0, 0, 0, 0.6);
+}
+
+.big {
+  width: 200px;
+  height: 200px;
+}
+
+.small {
+  width: 100px;
+  height: 100px;
+}
+
+ellipse.big {
+  width: 150px;
+}
+
+ellipse.small {
+  width: 75px;
+}
+
+.table-block .hovered {
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2),
+    0px 0px 20px rgba(255, 255, 255, 0.4), 0px 0px 30px rgba(255, 255, 255, 0.6);
+}

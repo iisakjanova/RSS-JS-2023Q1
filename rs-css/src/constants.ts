@@ -3,7 +3,7 @@ const layoutCode = {
   class: "table",
   children: [
     {
-      tag: "circle",
+      tag: "ellipse",
       class: "big",
       children: [
         {
@@ -15,6 +15,12 @@ const layoutCode = {
     {
       tag: "circle",
       class: "big",
+      children: [
+        {
+          tag: "ellipse",
+          class: "small",
+        },
+      ],
     },
   ],
 };

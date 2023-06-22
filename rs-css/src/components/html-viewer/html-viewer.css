@@ -18,3 +18,7 @@
 .layout > div {
   padding-left: 0;
 }
+
+.layout .hovered {
+  color: white;
+}

@@ -3,7 +3,7 @@ import layoutCode from "../../constants";
 
 import "./html-viewer.css";
 
-type CustomNodeType = {
+export type CustomNodeType = {
   tag: string;
   class?: string;
   children?: CustomNodeType[];
