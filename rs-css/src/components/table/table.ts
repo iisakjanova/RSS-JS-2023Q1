@@ -9,9 +9,16 @@ class Table {
     this.data = data;
   }
 
+  private findElement(id: string) {
+    const layoutElementInViewer = document.querySelector(".layout");
+    const element = layoutElementInViewer?.querySelector(`[data-id="${id}"]`);
+    return element;
+  }
+
   private nodeToHtml(node: CustomNodeType) {
     const element = document.createElement(node.tag);
     element.className = node.class ?? "";
+    element.setAttribute("data-id", node.id);
 
     const childrenLength = node.children?.length ?? 0;
 
@@ -22,22 +29,39 @@ class Table {
       }
     }
 
-    element.addEventListener("mouseenter", function (event) {
+    element.addEventListener("mouseenter", (event) => {
       const targetedElement = event.currentTarget;
       const layoutElement = document.querySelector(".table-block");
       const divElements = layoutElement?.querySelectorAll("div");
+
       if (divElements) {
         for (let i = 0; i < divElements.length; i += 1) {
           divElements[i].classList.remove("hovered");
         }
       }
 
+      const layoutElementInViewer = document.querySelector(".layout");
+      const divElementsInViewer =
+        layoutElementInViewer?.querySelectorAll("div");
+
+      if (divElementsInViewer) {
+        for (let i = 0; i < divElementsInViewer.length; i += 1) {
+          divElementsInViewer[i].classList.remove("hovered");
+        }
+      }
+
       if (targetedElement instanceof HTMLElement) {
         targetedElement.classList.add("hovered");
+        targetedElement.parentElement?.classList.remove("hovered");
+
+        const matchingElementInViewer = this.findElement(
+          targetedElement.dataset.id ?? ""
+        );
+        matchingElementInViewer?.classList.add("hovered");
       }
     });
 
-    element.addEventListener("mouseleave", function (event) {
+    element.addEventListener("mouseleave", (event) => {
       const targetedElement = event.currentTarget;
 
       if (targetedElement instanceof HTMLElement) {
@@ -48,6 +72,18 @@ class Table {
           targetedElement.parentElement?.classList.add("hovered");
         }
         targetedElement.classList.remove("hovered");
+
+        const matchingElementInViewer = this.findElement(
+          targetedElement.dataset.id ?? ""
+        );
+
+        if (
+          matchingElementInViewer?.closest(".layout") &&
+          matchingElementInViewer.parentElement?.className !== "layout"
+        ) {
+          matchingElementInViewer.parentElement?.classList.add("hovered");
+        }
+        matchingElementInViewer?.classList.remove("hovered");
       }
     });
 
