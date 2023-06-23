@@ -24,6 +24,7 @@ const layoutCode = {
           id: "5",
           tag: "ellipse",
           class: "small",
+          targetShape: true,
         },
       ],
     },

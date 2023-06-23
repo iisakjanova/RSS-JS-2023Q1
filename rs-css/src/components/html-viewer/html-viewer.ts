@@ -8,6 +8,7 @@ export type CustomNodeType = {
   tag: string;
   class?: string;
   children?: CustomNodeType[];
+  targetShape?: boolean;
 };
 
 interface HtmlViewerInterface {

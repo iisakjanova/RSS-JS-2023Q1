@@ -18,6 +18,9 @@ class Table {
   private nodeToHtml(node: CustomNodeType) {
     const element = document.createElement(node.tag);
     element.className = node.class ?? "";
+    if (node.targetShape) {
+      element.classList.add("target-shape-animation");
+    }
     element.setAttribute("data-id", node.id);
 
     const childrenLength = node.children?.length ?? 0;
