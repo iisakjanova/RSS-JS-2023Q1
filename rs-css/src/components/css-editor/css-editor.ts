@@ -9,8 +9,15 @@ export interface CssEditorInterface {
 class CssEditor implements CssEditorInterface {
   cssEditorBlock: HTMLDivElement;
 
+  inputValue: string;
+
   constructor() {
     this.cssEditorBlock = document.createElement("div");
+    this.inputValue = "";
+  }
+
+  public getEnteredSelector() {
+    return this.inputValue;
   }
 
   public render() {
@@ -46,6 +53,13 @@ class CssEditor implements CssEditorInterface {
     editorInputElement.type = "text";
     editorInputElement.className = "editor-input";
     editorInputElement.placeholder = "type in a css selector";
+
+    editorInputElement.addEventListener("change", (event) => {
+      if (event.target instanceof HTMLInputElement) {
+        const enteredSelector = event.target?.value;
+        this.inputValue = enteredSelector;
+      }
+    });
 
     const buttonElement = document.createElement("button");
     buttonElement.type = "button";
