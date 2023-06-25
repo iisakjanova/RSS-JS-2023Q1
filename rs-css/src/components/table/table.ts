@@ -1,4 +1,4 @@
-import { CustomNodeType } from "../html-viewer/html-viewer";
+import { CustomNodeType } from "../../types";
 
 import "./table.css";
 

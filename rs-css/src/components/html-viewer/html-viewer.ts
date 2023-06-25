@@ -1,15 +1,8 @@
 import EditorViewerHeader from "../editor-viewer-header/editor-viewer-header";
 import level1 from "../../constants";
+import { CustomNodeType } from "../../types";
 
 import "./html-viewer.css";
-
-export type CustomNodeType = {
-  id: string;
-  tag: string;
-  class?: string;
-  children?: CustomNodeType[];
-  targetShape?: boolean;
-};
 
 interface HtmlViewerInterface {
   render(): HTMLDivElement;

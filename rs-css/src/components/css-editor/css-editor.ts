@@ -1,18 +1,11 @@
 import EditorViewerHeader from "../editor-viewer-header/editor-viewer-header";
-import { CustomNodeType } from "../html-viewer/html-viewer";
+import { CustomNodeType, LevelType, OnInputSubmitType } from "../../types";
 
 import "./css-editor.css";
 
 export interface CssEditorInterface {
   render(): HTMLDivElement;
 }
-
-type OnInputSubmitType = (answer: string, inputValue: string) => void;
-
-type LevelType = {
-  layoutCode: CustomNodeType;
-  answer: string;
-};
 
 class CssEditor implements CssEditorInterface {
   onInputSubmit: OnInputSubmitType;
