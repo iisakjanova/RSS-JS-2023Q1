@@ -1,4 +1,5 @@
 import EditorViewerHeader from "../editor-viewer-header/editor-viewer-header";
+import { CustomNodeType } from "../html-viewer/html-viewer";
 
 import "./css-editor.css";
 
@@ -6,18 +7,30 @@ export interface CssEditorInterface {
   render(): HTMLDivElement;
 }
 
+type OnInputSubmitType = (answer: string, inputValue: string) => void;
+
+type LevelType = {
+  layoutCode: CustomNodeType;
+  answer: string;
+};
+
 class CssEditor implements CssEditorInterface {
+  onInputSubmit: OnInputSubmitType;
+
+  layoutCode: CustomNodeType;
+
+  answer: string;
+
   cssEditorBlock: HTMLDivElement;
 
   inputValue: string;
 
-  constructor() {
+  constructor(onInputSubmit: OnInputSubmitType, level: LevelType) {
+    this.onInputSubmit = onInputSubmit;
+    this.layoutCode = level.layoutCode;
+    this.answer = level.answer;
     this.cssEditorBlock = document.createElement("div");
     this.inputValue = "";
-  }
-
-  public getEnteredSelector() {
-    return this.inputValue;
   }
 
   public render() {
@@ -59,6 +72,14 @@ class CssEditor implements CssEditorInterface {
         const enteredSelector = event.target?.value;
         this.inputValue = enteredSelector;
       }
+
+      this.onInputSubmit(this.answer, this.inputValue);
+    });
+
+    editorInputFormElement?.addEventListener("submit", (event) => {
+      event.preventDefault();
+      this.inputValue = "";
+      editorInputElement.value = "";
     });
 
     const buttonElement = document.createElement("button");
