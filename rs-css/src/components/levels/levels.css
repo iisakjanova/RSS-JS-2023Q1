@@ -1,0 +1,27 @@
+.levels-block {
+  background: grey;
+}
+
+.levels-title {
+  margin: 0;
+  padding-top: 10px;
+  padding-left: 20px;
+}
+
+.levels-list {
+  margin: 0;
+  padding: 20px;
+  list-style: none;
+  font-size: 20px;
+  color: #a1a1a1;
+}
+
+.checkmark {
+  display: inline-block;
+  margin-right: 10px;
+  width: 12px;
+  height: 20px;
+  border: solid 3px #a1a1a1;
+  border-width: 0 4px 4px 0;
+  transform: rotate(40deg);
+}

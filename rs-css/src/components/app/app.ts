@@ -3,6 +3,7 @@ import HtmlViewer from "../html-viewer/html-viewer";
 import Table from "../table/table";
 import level1 from "../../constants";
 import Game from "../game/game";
+import Levels from "../levels/levels";
 
 interface App {
   render(): void;
@@ -17,6 +18,8 @@ class App {
 
   game: Game;
 
+  levels: Levels;
+
   container: HTMLElement | null;
 
   constructor() {
@@ -24,6 +27,7 @@ class App {
     this.cssEditor = new CssEditor(this.onInputSubmit.bind(this), level1);
     this.htmlViewer = new HtmlViewer();
     this.table = new Table(level1.layoutCode);
+    this.levels = new Levels();
     this.container = document.getElementById("app-container");
   }
 
@@ -33,6 +37,7 @@ class App {
 
   public render() {
     const tableElement = this.table.render();
+    const levelsElement = this.levels.render();
     const editorAndViewerWrapper = document.createElement("div");
     editorAndViewerWrapper.className = "editor-viewer-blocks-wrapper";
 
@@ -45,6 +50,7 @@ class App {
     if (this.container) {
       this.container.append(tableElement);
       this.container.append(editorAndViewerWrapper);
+      this.container.append(levelsElement);
     }
   }
 }
