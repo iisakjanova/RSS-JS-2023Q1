@@ -1,7 +1,7 @@
 import CssEditor from "../css-editor/css-editor";
 import HtmlViewer from "../html-viewer/html-viewer";
 import Table from "../table/table";
-import level1 from "../../constants";
+import levelsData from "../../levelsData/levelsData";
 import Game from "../game/game";
 import Levels from "../levels/levels";
 
@@ -23,10 +23,14 @@ class App {
   container: HTMLElement | null;
 
   constructor() {
+    console.log(levelsData);
     this.game = new Game();
-    this.cssEditor = new CssEditor(this.onInputSubmit.bind(this), level1);
+    this.cssEditor = new CssEditor(
+      this.onInputSubmit.bind(this),
+      levelsData[1]
+    );
     this.htmlViewer = new HtmlViewer();
-    this.table = new Table(level1.layoutCode);
+    this.table = new Table(levelsData[1].layoutCode);
     this.levels = new Levels();
     this.container = document.getElementById("app-container");
   }

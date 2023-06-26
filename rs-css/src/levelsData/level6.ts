@@ -1,4 +1,6 @@
-const level1 = {
+const level6 = {
+  title: "Select the circle and ellipse",
+  description: "Comma Combinator",
   layoutCode: {
     id: "1",
     tag: "div",
@@ -6,15 +8,21 @@ const level1 = {
     children: [
       {
         id: "2",
-        tag: "ellipse",
+        tag: "circle",
         class: "big",
         targetShape: true,
       },
       {
         id: "3",
-        tag: "ellipse",
+        tag: "square",
         class: "big",
-        targetShape: true,
+        children: [
+          {
+            id: "5",
+            tag: "circle",
+            class: "small",
+          },
+        ],
       },
       {
         id: "4",
@@ -24,7 +32,7 @@ const level1 = {
       },
     ],
   },
-  answer: "ellipse",
+  answer: "circle, ellipse",
 };
 
-export default level1;
+export default level6;

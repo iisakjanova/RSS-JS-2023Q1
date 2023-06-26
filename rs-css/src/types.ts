@@ -7,6 +7,8 @@ export type CustomNodeType = {
 };
 
 export type LevelType = {
+  title: string;
+  description: string;
   layoutCode: CustomNodeType;
   answer: string;
 };
