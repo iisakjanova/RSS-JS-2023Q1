@@ -4,8 +4,11 @@ import "./levels.css";
 class Levels {
   onChangeLevel: OnChangeLevelType;
 
-  constructor(onChangeLevel: OnChangeLevelType) {
+  currentLevel: string;
+
+  constructor(onChangeLevel: OnChangeLevelType, currentLevel: string) {
     this.onChangeLevel = onChangeLevel;
+    this.currentLevel = currentLevel;
   }
 
   private changeLevelHandler(num: string) {
@@ -32,6 +35,10 @@ class Levels {
       checkmark.className = "checkmark";
       const levelTitle = document.createElement("span");
       levelTitle.innerHTML = i.toString();
+
+      if (this.currentLevel === i.toString()) {
+        levelItemElement.classList.add("current");
+      }
 
       levelItemElement.append(checkmark);
       levelItemElement.append(levelTitle);

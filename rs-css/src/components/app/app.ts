@@ -9,7 +9,7 @@ interface App {
   render(): void;
 }
 
-type BlockInstance = Table | HtmlViewer | CssEditor;
+type BlockInstance = Table | HtmlViewer | CssEditor | Levels;
 
 class App {
   cssEditor: CssEditor;
@@ -34,7 +34,10 @@ class App {
     );
     this.htmlViewer = new HtmlViewer(levelsData[1].layoutCode);
     this.table = new Table(levelsData[1].layoutCode);
-    this.levels = new Levels(this.onChangeLevel.bind(this));
+    this.levels = new Levels(
+      this.onChangeLevel.bind(this),
+      this.game.getCurrentLevel()
+    );
     this.container = document.getElementById("app-container");
     this.editorAndViewerWrapper = document.createElement("div");
   }
@@ -53,6 +56,8 @@ class App {
   }
 
   public onChangeLevel(num: string) {
+    this.game.setCurrentLevel(num);
+
     this.table = new Table(levelsData[num].layoutCode);
     this.rerenderBlock(".table-block", this.container, this.table);
 
@@ -72,10 +77,21 @@ class App {
       this.editorAndViewerWrapper,
       this.cssEditor
     );
+
+    this.levels = new Levels(
+      this.onChangeLevel.bind(this),
+      this.game.getCurrentLevel()
+    );
+    this.rerenderBlock(".levels-block", this.container, this.levels);
   }
 
   public onInputSubmit(answer: string, userAnswer: string) {
-    this.game.checkAnswer(answer, userAnswer);
+    const result = this.game.checkAnswer(answer, userAnswer);
+
+    if (result) {
+      const levelNum = this.game.getCurrentLevel();
+      this.onChangeLevel(levelNum);
+    }
   }
 
   public render() {
