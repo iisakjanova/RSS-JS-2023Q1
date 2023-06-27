@@ -13,4 +13,10 @@ export type LevelType = {
   answer: string;
 };
 
+export type levelsDataType = {
+  [key: string]: LevelType;
+};
+
 export type OnInputSubmitType = (answer: string, inputValue: string) => void;
+
+export type OnChangeLevelType = (num: string) => void;

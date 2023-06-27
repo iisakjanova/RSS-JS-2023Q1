@@ -1,6 +1,17 @@
+import { OnChangeLevelType } from "../../types";
 import "./levels.css";
 
 class Levels {
+  onChangeLevel: OnChangeLevelType;
+
+  constructor(onChangeLevel: OnChangeLevelType) {
+    this.onChangeLevel = onChangeLevel;
+  }
+
+  private changeLevelHandler(num: string) {
+    this.onChangeLevel(num);
+  }
+
   public render() {
     const levelsBlockElement = document.createElement("div");
     levelsBlockElement.className = "levels-block";
@@ -16,6 +27,7 @@ class Levels {
 
     for (let i = 1; i <= 10; i += 1) {
       const levelItemElement = document.createElement("li");
+      levelItemElement.setAttribute("data-level", i.toString());
       const checkmark = document.createElement("span");
       checkmark.className = "checkmark";
       const levelTitle = document.createElement("span");
@@ -25,6 +37,20 @@ class Levels {
       levelItemElement.append(levelTitle);
       levelsListElement.append(levelItemElement);
     }
+
+    levelsBlockElement.addEventListener("click", (event) => {
+      if (event.target instanceof HTMLElement) {
+        const target = event.target.closest("li");
+
+        if (target) {
+          const levelNumber = target.dataset.level;
+
+          if (levelNumber) {
+            this.changeLevelHandler(levelNumber);
+          }
+        }
+      }
+    });
 
     return levelsBlockElement;
   }

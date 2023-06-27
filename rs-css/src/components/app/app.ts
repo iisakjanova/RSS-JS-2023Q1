@@ -23,7 +23,6 @@ class App {
   container: HTMLElement | null;
 
   constructor() {
-    console.log(levelsData);
     this.game = new Game();
     this.cssEditor = new CssEditor(
       this.onInputSubmit.bind(this),
@@ -31,8 +30,18 @@ class App {
     );
     this.htmlViewer = new HtmlViewer();
     this.table = new Table(levelsData[1].layoutCode);
-    this.levels = new Levels();
+    this.levels = new Levels(this.onChangeLevel.bind(this));
     this.container = document.getElementById("app-container");
+  }
+
+  public onChangeLevel(num: string) {
+    const oldTable = this.container?.querySelector(".table-block");
+    this.table = new Table(levelsData[num].layoutCode);
+    const newTable = this.table.render();
+
+    if (oldTable instanceof HTMLDivElement) {
+      this.container?.replaceChild(newTable, oldTable);
+    }
   }
 
   public onInputSubmit(answer: string, userAnswer: string) {
