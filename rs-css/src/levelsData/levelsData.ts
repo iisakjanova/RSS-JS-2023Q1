@@ -8,9 +8,9 @@ import level6 from "./level6";
 import level7 from "./level7";
 import level8 from "./level8";
 import level9 from "./level9";
-import { levelsDataType } from "../types";
+import { LevelsDataType } from "../types";
 
-const levelsData: levelsDataType = {
+const levelsData: LevelsDataType = {
   1: level1,
   2: level2,
   3: level3,

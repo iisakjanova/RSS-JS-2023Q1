@@ -13,7 +13,7 @@ export type LevelType = {
   answer: string;
 };
 
-export type levelsDataType = {
+export type LevelsDataType = {
   [key: string]: LevelType;
 };
 

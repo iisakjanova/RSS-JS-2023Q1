@@ -9,6 +9,8 @@ interface App {
   render(): void;
 }
 
+type BlockInstance = Table | HtmlViewer | CssEditor;
+
 class App {
   cssEditor: CssEditor;
 
@@ -22,26 +24,54 @@ class App {
 
   container: HTMLElement | null;
 
+  editorAndViewerWrapper: HTMLDivElement;
+
   constructor() {
     this.game = new Game();
     this.cssEditor = new CssEditor(
       this.onInputSubmit.bind(this),
       levelsData[1]
     );
-    this.htmlViewer = new HtmlViewer();
+    this.htmlViewer = new HtmlViewer(levelsData[1].layoutCode);
     this.table = new Table(levelsData[1].layoutCode);
     this.levels = new Levels(this.onChangeLevel.bind(this));
     this.container = document.getElementById("app-container");
+    this.editorAndViewerWrapper = document.createElement("div");
+  }
+
+  private rerenderBlock(
+    oldElSelector: string,
+    parentEl: HTMLElement | null,
+    newInstance: BlockInstance
+  ) {
+    const oldEl = parentEl?.querySelector(oldElSelector);
+    const newTable = newInstance.render();
+
+    if (oldEl instanceof HTMLDivElement) {
+      parentEl?.replaceChild(newTable, oldEl);
+    }
   }
 
   public onChangeLevel(num: string) {
-    const oldTable = this.container?.querySelector(".table-block");
     this.table = new Table(levelsData[num].layoutCode);
-    const newTable = this.table.render();
+    this.rerenderBlock(".table-block", this.container, this.table);
 
-    if (oldTable instanceof HTMLDivElement) {
-      this.container?.replaceChild(newTable, oldTable);
-    }
+    this.htmlViewer = new HtmlViewer(levelsData[num].layoutCode);
+    this.rerenderBlock(
+      ".html-viewer-block",
+      this.editorAndViewerWrapper,
+      this.htmlViewer
+    );
+
+    this.cssEditor = new CssEditor(
+      this.onInputSubmit.bind(this),
+      levelsData[num]
+    );
+    this.rerenderBlock(
+      ".css-editor-block",
+      this.editorAndViewerWrapper,
+      this.cssEditor
+    );
   }
 
   public onInputSubmit(answer: string, userAnswer: string) {
@@ -51,18 +81,18 @@ class App {
   public render() {
     const tableElement = this.table.render();
     const levelsElement = this.levels.render();
-    const editorAndViewerWrapper = document.createElement("div");
-    editorAndViewerWrapper.className = "editor-viewer-blocks-wrapper";
+
+    this.editorAndViewerWrapper.className = "editor-viewer-blocks-wrapper";
 
     const cssEditorElement = this.cssEditor.render();
     const htmlViewerElement = this.htmlViewer.render();
 
-    editorAndViewerWrapper.append(cssEditorElement);
-    editorAndViewerWrapper.append(htmlViewerElement);
+    this.editorAndViewerWrapper.append(cssEditorElement);
+    this.editorAndViewerWrapper.append(htmlViewerElement);
 
     if (this.container) {
       this.container.append(tableElement);
-      this.container.append(editorAndViewerWrapper);
+      this.container.append(this.editorAndViewerWrapper);
       this.container.append(levelsElement);
     }
   }

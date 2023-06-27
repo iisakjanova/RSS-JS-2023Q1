@@ -1,5 +1,4 @@
 import EditorViewerHeader from "../editor-viewer-header/editor-viewer-header";
-import levelsData from "../../levelsData/levelsData";
 import { CustomNodeType } from "../../types";
 
 import "./html-viewer.css";
@@ -11,7 +10,10 @@ interface HtmlViewerInterface {
 class HtmlViewer implements HtmlViewerInterface {
   htmlViewerBlock: HTMLDivElement;
 
-  constructor() {
+  layout: CustomNodeType;
+
+  constructor(layout: CustomNodeType) {
+    this.layout = layout;
     this.htmlViewerBlock = document.createElement("div");
   }
 
@@ -125,7 +127,7 @@ class HtmlViewer implements HtmlViewerInterface {
     const layoutElement = document.createElement("div");
     layoutElement.className = "layout";
 
-    layoutElement.appendChild(this.nodeToHtml(levelsData[1].layoutCode));
+    layoutElement.appendChild(this.nodeToHtml(this.layout));
 
     htmlViewer.append(layoutElement);
 

@@ -29,7 +29,7 @@ module.exports = {
     'prettier/prettier': 'error',
     '@typescript-eslint/no-explicit-any': 'error',
     'class-methods-use-this': ['error', {
-      'exceptMethods': ['findElement', 'checkAnswer', 'errorHandler']
+      'exceptMethods': ['findElement', 'checkAnswer', 'rerenderBlock', 'errorHandler']
     }],
   }  
 };
