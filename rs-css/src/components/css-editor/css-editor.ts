@@ -60,23 +60,22 @@ class CssEditor implements CssEditorInterface {
     editorInputElement.className = "editor-input";
     editorInputElement.placeholder = "type in a css selector";
 
-    editorInputElement.addEventListener("change", (event) => {
+    editorInputElement.addEventListener("input", (event) => {
       if (event.target instanceof HTMLInputElement) {
         const enteredSelector = event.target?.value;
         this.inputValue = enteredSelector;
       }
-
-      this.onInputSubmit(this.answer, this.inputValue);
     });
 
     editorInputFormElement?.addEventListener("submit", (event) => {
       event.preventDefault();
+      this.onInputSubmit(this.answer, this.inputValue);
       this.inputValue = "";
       editorInputElement.value = "";
     });
 
     const buttonElement = document.createElement("button");
-    buttonElement.type = "button";
+    buttonElement.type = "submit";
     buttonElement.innerText = "enter";
 
     editorInputFormElement.append(editorInputElement);
