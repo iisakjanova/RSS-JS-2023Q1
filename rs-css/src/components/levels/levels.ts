@@ -1,4 +1,4 @@
-import { OnChangeLevelType } from "../../types";
+import { GameStatsType, OnChangeLevelType } from "../../types";
 import "./levels.css";
 
 class Levels {
@@ -6,9 +6,16 @@ class Levels {
 
   currentLevel: string;
 
-  constructor(onChangeLevel: OnChangeLevelType, currentLevel: string) {
+  stats: GameStatsType;
+
+  constructor(
+    onChangeLevel: OnChangeLevelType,
+    currentLevel: string,
+    gameStats: GameStatsType
+  ) {
     this.onChangeLevel = onChangeLevel;
     this.currentLevel = currentLevel;
+    this.stats = gameStats;
   }
 
   private changeLevelHandler(num: string) {
@@ -38,6 +45,10 @@ class Levels {
 
       if (this.currentLevel === i.toString()) {
         levelItemElement.classList.add("current");
+      }
+
+      if (this.stats[i]) {
+        checkmark.classList.add("done");
       }
 
       levelItemElement.append(checkmark);

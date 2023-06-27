@@ -26,6 +26,10 @@
   transform: rotate(40deg);
 }
 
+.checkmark.done {
+  border-color: green;
+}
+
 .current {
   border: 1px solid #a1a1a1;
 }

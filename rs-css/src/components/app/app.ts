@@ -27,7 +27,7 @@ class App {
   editorAndViewerWrapper: HTMLDivElement;
 
   constructor() {
-    this.game = new Game();
+    this.game = new Game(Object.keys(levelsData).length);
     this.cssEditor = new CssEditor(
       this.onInputSubmit.bind(this),
       levelsData[1]
@@ -36,7 +36,8 @@ class App {
     this.table = new Table(levelsData[1].layoutCode);
     this.levels = new Levels(
       this.onChangeLevel.bind(this),
-      this.game.getCurrentLevel()
+      this.game.getCurrentLevel(),
+      this.game.getGameStats()
     );
     this.container = document.getElementById("app-container");
     this.editorAndViewerWrapper = document.createElement("div");
@@ -80,7 +81,8 @@ class App {
 
     this.levels = new Levels(
       this.onChangeLevel.bind(this),
-      this.game.getCurrentLevel()
+      this.game.getCurrentLevel(),
+      this.game.getGameStats()
     );
     this.rerenderBlock(".levels-block", this.container, this.levels);
   }
