@@ -7,10 +7,13 @@ class Game {
 
   levelsQty: number;
 
+  levelsDone: number;
+
   constructor(levelsQty: number) {
     this.currentLevel = 1;
     this.levelsQty = levelsQty;
     this.gameStats = this.createGameStats();
+    this.levelsDone = 0;
   }
 
   private createGameStats() {
@@ -25,7 +28,16 @@ class Game {
 
   private winLevel() {
     this.gameStats[this.currentLevel] = true;
-    this.currentLevel += 1;
+
+    if (this.currentLevel < this.levelsQty) {
+      this.currentLevel += 1;
+    }
+
+    this.levelsDone += 1;
+
+    if (this.levelsDone === this.levelsQty) {
+      alert("Congratulations! You win!");
+    }
   }
 
   public checkAnswer(answer: string, userAnswer: string) {
