@@ -15,19 +15,23 @@ interface App {
 type BlockInstance = Table | HtmlViewer | CssEditor | Levels | Alert | TaskInfo;
 
 class App {
-  cssEditor: CssEditor;
+  cssEditor: BlockInstance;
 
   htmlViewer: HtmlViewer;
 
-  table: Table;
+  table: BlockInstance;
 
   game: Game;
 
-  levels: Levels;
+  levels: BlockInstance;
 
   container: HTMLElement | null;
 
   editorAndViewerWrapper: HTMLDivElement;
+
+  gameBlockElement: HTMLDivElement;
+
+  taskBlockElement: HTMLDivElement;
 
   alert: BlockInstance;
 
@@ -53,6 +57,8 @@ class App {
     );
     this.container = document.getElementById("app-container");
     this.editorAndViewerWrapper = document.createElement("div");
+    this.gameBlockElement = document.createElement("div");
+    this.taskBlockElement = document.createElement("div");
   }
 
   private rerenderBlock(
@@ -75,10 +81,14 @@ class App {
       levelsData[num].title,
       levelsData[num].description
     );
-    this.rerenderBlock(".task-info-block", this.container, this.taskInfo);
+    this.rerenderBlock(
+      ".task-info-block",
+      this.taskBlockElement,
+      this.taskInfo
+    );
 
     this.table = new Table(levelsData[num].layoutCode);
-    this.rerenderBlock(".table-block", this.container, this.table);
+    this.rerenderBlock(".table-block", this.taskBlockElement, this.table);
 
     this.htmlViewer = new HtmlViewer(levelsData[num].layoutCode);
     this.rerenderBlock(
@@ -102,7 +112,7 @@ class App {
       this.game.getCurrentLevel(),
       this.game.getGameStats()
     );
-    this.rerenderBlock(".levels-block", this.container, this.levels);
+    this.rerenderBlock(".levels-block", this.gameBlockElement, this.levels);
   }
 
   public onInputSubmit(answer: string, userAnswer: string) {
@@ -132,11 +142,20 @@ class App {
     const footer = new Footer();
     const footerElement = footer.render();
 
+    this.gameBlockElement = document.createElement("div");
+    this.gameBlockElement.className = "game-block";
+
+    this.taskBlockElement.className = "task-block";
+
+    this.taskBlockElement.append(taskInfoElement);
+    this.taskBlockElement.append(tableElement);
+    this.taskBlockElement.append(this.editorAndViewerWrapper);
+
+    this.gameBlockElement.append(this.taskBlockElement);
+    this.gameBlockElement.append(levelsElement);
+
     if (this.container) {
-      this.container.append(taskInfoElement);
-      this.container.append(tableElement);
-      this.container.append(this.editorAndViewerWrapper);
-      this.container.append(levelsElement);
+      this.container.append(this.gameBlockElement);
       this.container.append(alertElement);
       this.container.append(footerElement);
     }

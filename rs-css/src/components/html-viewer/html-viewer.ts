@@ -29,15 +29,17 @@ class HtmlViewer implements HtmlViewerInterface {
 
     const childrenLength = node.children?.length ?? 0;
     const classString = node.class ? ` class="${node.class}"` : "";
+    const idString = /^[a-zA-Z]+$/.test(node.id) ? ` id="${node.id}"` : "";
+
     if (childrenLength === 0) {
       // Insert first line
       element.appendChild(
-        document.createTextNode(`<${node.tag}${classString} />`)
+        document.createTextNode(`<${node.tag}${classString}${idString} />`)
       );
     } else {
       // Insert first line
       element.appendChild(
-        document.createTextNode(`<${node.tag}${classString}>`)
+        document.createTextNode(`<${node.tag}${classString}${idString}>`)
       );
       // Insert children
       if (node.children) {
@@ -114,7 +116,7 @@ class HtmlViewer implements HtmlViewerInterface {
     const lineNumbers = document.createElement("ul");
     lineNumbers.className = "line-numbers";
 
-    for (let i = 1; i <= 20; i += 1) {
+    for (let i = 1; i <= 14; i += 1) {
       const lineNumbersItem = document.createElement("li");
 
       lineNumbersItem.className = "line-numbers-item";

@@ -40,7 +40,7 @@ class CssEditor implements CssEditorInterface {
     const lineNumbers = document.createElement("ul");
     lineNumbers.className = "line-numbers";
 
-    for (let i = 1; i <= 20; i += 1) {
+    for (let i = 1; i <= 14; i += 1) {
       const lineNumbersItem = document.createElement("li");
 
       lineNumbersItem.className = "line-numbers-item";

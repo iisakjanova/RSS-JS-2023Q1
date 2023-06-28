@@ -1,14 +1,9 @@
-.table-block {
-  width: 80%;
-}
-
 .table {
   display: flex;
-  margin: 30px auto;
+  margin: 10px auto;
   justify-content: center;
   align-items: center;
-  width: 80%;
-  height: 400px;
+  height: 200px;
   border-radius: 10px;
   background: linear-gradient(#dd992d, #cd8c26);
   transform: perspective(1000px) rotateX(25deg);
@@ -62,21 +57,21 @@ ellipse {
 }
 
 .big {
-  width: 200px;
-  height: 200px;
-}
-
-.small {
   width: 100px;
   height: 100px;
 }
 
+.small {
+  width: 50px;
+  height: 50px;
+}
+
 ellipse.big {
-  width: 150px;
+  width: 70px;
 }
 
 ellipse.small {
-  width: 75px;
+  width: 30px;
 }
 
 .table-block .hovered {
@@ -86,19 +81,19 @@ ellipse.small {
 
 @keyframes jump {
   0% {
-    transform: rotate(0deg);
+    transform: rotate(0deg) translateY(0);
   }
   25% {
-    transform: rotate(-15deg);
+    transform: rotate(-15deg) translateY(-20px);
   }
   50% {
-    transform: rotate(0deg);
+    transform: rotate(0deg) translateY(0);
   }
   75% {
-    transform: rotate(15deg);
+    transform: rotate(15deg) translateY(-20px);
   }
   100% {
-    transform: rotate(0deg);
+    transform: rotate(0deg) translateY(0);
   }
 }
 

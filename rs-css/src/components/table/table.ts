@@ -23,6 +23,10 @@ class Table {
     }
     element.setAttribute("data-id", node.id);
 
+    if (/^[a-zA-Z]+$/.test(node.id)) {
+      element.id = node.id;
+    }
+
     const childrenLength = node.children?.length ?? 0;
 
     if (node.children) {
