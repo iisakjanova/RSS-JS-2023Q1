@@ -1,4 +1,5 @@
 import { GameStatsType } from "../../types";
+import Alert from "../alert/alert";
 
 class Game {
   currentLevel: number;
@@ -9,11 +10,14 @@ class Game {
 
   levelsDone: number;
 
-  constructor(levelsQty: number) {
+  alert: Alert;
+
+  constructor(levelsQty: number, alert: Alert) {
     this.currentLevel = 1;
     this.levelsQty = levelsQty;
     this.gameStats = this.createGameStats();
-    this.levelsDone = 0;
+    this.levelsDone = 9;
+    this.alert = alert;
   }
 
   private createGameStats() {
@@ -36,7 +40,7 @@ class Game {
     this.levelsDone += 1;
 
     if (this.levelsDone === this.levelsQty) {
-      alert("Congratulations! You win!");
+      this.alert.showAlert("Congratulations! You win!");
     }
   }
 

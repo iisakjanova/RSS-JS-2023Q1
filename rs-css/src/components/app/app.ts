@@ -4,12 +4,13 @@ import Table from "../table/table";
 import levelsData from "../../levelsData/levelsData";
 import Game from "../game/game";
 import Levels from "../levels/levels";
+import Alert from "../alert/alert";
 
 interface App {
   render(): void;
 }
 
-type BlockInstance = Table | HtmlViewer | CssEditor | Levels;
+type BlockInstance = Table | HtmlViewer | CssEditor | Levels | Alert;
 
 class App {
   cssEditor: CssEditor;
@@ -26,8 +27,11 @@ class App {
 
   editorAndViewerWrapper: HTMLDivElement;
 
+  alert: BlockInstance;
+
   constructor() {
-    this.game = new Game(Object.keys(levelsData).length);
+    this.alert = new Alert();
+    this.game = new Game(Object.keys(levelsData).length, this.alert);
     this.cssEditor = new CssEditor(
       this.onInputSubmit.bind(this),
       levelsData[1]
@@ -108,10 +112,13 @@ class App {
     this.editorAndViewerWrapper.append(cssEditorElement);
     this.editorAndViewerWrapper.append(htmlViewerElement);
 
+    const alertElement = this.alert.render();
+
     if (this.container) {
       this.container.append(tableElement);
       this.container.append(this.editorAndViewerWrapper);
       this.container.append(levelsElement);
+      this.container.append(alertElement);
     }
   }
 }
