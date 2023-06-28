@@ -6,6 +6,7 @@ import Game from "../game/game";
 import Levels from "../levels/levels";
 import Alert from "../alert/alert";
 import TaskInfo from "../taskInfo/taskInfo";
+import Footer from "../footer/footer";
 
 interface App {
   render(): void;
@@ -128,12 +129,16 @@ class App {
 
     const alertElement = this.alert.render();
 
+    const footer = new Footer();
+    const footerElement = footer.render();
+
     if (this.container) {
       this.container.append(taskInfoElement);
       this.container.append(tableElement);
       this.container.append(this.editorAndViewerWrapper);
       this.container.append(levelsElement);
       this.container.append(alertElement);
+      this.container.append(footerElement);
     }
   }
 }
