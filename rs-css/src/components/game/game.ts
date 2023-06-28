@@ -16,7 +16,7 @@ class Game {
     this.currentLevel = 1;
     this.levelsQty = levelsQty;
     this.gameStats = this.createGameStats();
-    this.levelsDone = 9;
+    this.levelsDone = 0;
     this.alert = alert;
   }
 
