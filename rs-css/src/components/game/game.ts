@@ -44,12 +44,24 @@ class Game {
     }
   }
 
+  private looseLevel() {
+    const cssEditorViewerElement = document.querySelector(
+      ".editor-viewer-blocks-wrapper"
+    );
+    cssEditorViewerElement?.classList.add("shaking-animation");
+
+    setTimeout(() => {
+      cssEditorViewerElement?.classList.remove("shaking-animation");
+    }, 1000);
+  }
+
   public checkAnswer(answer: string, userAnswer: string) {
     if (answer === userAnswer) {
       this.winLevel();
       return true;
     }
 
+    this.looseLevel();
     return false;
   }
 
