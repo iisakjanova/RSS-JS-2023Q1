@@ -20,6 +20,7 @@ class Levels {
 
   private changeLevelHandler(num: string) {
     this.onChangeLevel(num);
+    localStorage.setItem("currentLevel", num);
   }
 
   public render() {

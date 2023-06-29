@@ -1,6 +1,10 @@
 import { GameStatsType } from "../../types";
 import Alert from "../alert/alert";
 
+type DataToSaveType = {
+  [key: string]: string;
+};
+
 class Game {
   currentLevel: number;
 
@@ -13,10 +17,14 @@ class Game {
   alert: Alert;
 
   constructor(levelsQty: number, alert: Alert) {
-    this.currentLevel = 1;
+    this.currentLevel =
+      parseInt(localStorage.getItem("currentLevel") as string, 10) || 1;
     this.levelsQty = levelsQty;
-    this.gameStats = this.createGameStats();
-    this.levelsDone = 0;
+    this.gameStats =
+      JSON.parse(localStorage.getItem("gameStats") as string) ||
+      this.createGameStats();
+    this.levelsDone =
+      parseInt(localStorage.getItem("levelsDone") as string, 10) || 0;
     this.alert = alert;
   }
 
@@ -39,6 +47,14 @@ class Game {
 
     this.levelsDone += 1;
 
+    const dataToSave = {
+      levelsDone: this.levelsDone.toString(),
+      currentLevel: this.currentLevel.toString(),
+      gameStats: JSON.stringify(this.gameStats),
+    };
+
+    this.saveToLocalStorage(dataToSave);
+
     if (this.levelsDone === this.levelsQty) {
       this.alert.showAlert("Congratulations! You win!");
     }
@@ -53,6 +69,15 @@ class Game {
     setTimeout(() => {
       cssEditorViewerElement?.classList.remove("shaking-animation");
     }, 1000);
+  }
+
+  private saveToLocalStorage(data: DataToSaveType) {
+    const keys = Object.keys(data);
+
+    for (let i = 0; i < keys.length; i += 1) {
+      const key = keys[i];
+      localStorage.setItem(key, data[key]);
+    }
   }
 
   public checkAnswer(answer: string, userAnswer: string) {

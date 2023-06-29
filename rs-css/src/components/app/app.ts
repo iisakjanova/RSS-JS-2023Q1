@@ -42,14 +42,16 @@ class App {
     this.game = new Game(Object.keys(levelsData).length, this.alert);
     this.cssEditor = new CssEditor(
       this.onInputSubmit.bind(this),
-      levelsData[1]
+      levelsData[this.game.getCurrentLevel()]
     );
-    this.htmlViewer = new HtmlViewer(levelsData[1].layoutCode);
+    this.htmlViewer = new HtmlViewer(
+      levelsData[this.game.getCurrentLevel()].layoutCode
+    );
     this.taskInfo = new TaskInfo(
-      levelsData[1].title,
-      levelsData[1].description
+      levelsData[this.game.getCurrentLevel()].title,
+      levelsData[this.game.getCurrentLevel()].description
     );
-    this.table = new Table(levelsData[1].layoutCode);
+    this.table = new Table(levelsData[this.game.getCurrentLevel()].layoutCode);
     this.levels = new Levels(
       this.onChangeLevel.bind(this),
       this.game.getCurrentLevel(),
