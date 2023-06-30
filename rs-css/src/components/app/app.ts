@@ -12,12 +12,12 @@ interface App {
   render(): void;
 }
 
-type BlockInstance = Table | HtmlViewer | CssEditor | Levels | Alert | TaskInfo;
+export type BlockInstance = Table | HtmlViewer | CssEditor | Levels | TaskInfo;
 
 class App {
   cssEditor: BlockInstance;
 
-  htmlViewer: HtmlViewer;
+  htmlViewer: BlockInstance;
 
   table: BlockInstance;
 
@@ -33,7 +33,7 @@ class App {
 
   taskBlockElement: HTMLDivElement;
 
-  alert: BlockInstance;
+  alert: Alert;
 
   taskInfo: BlockInstance;
 
@@ -55,7 +55,8 @@ class App {
     this.levels = new Levels(
       this.onChangeLevel.bind(this),
       this.game.getCurrentLevel(),
-      this.game.getGameStats()
+      this.game.getGameStats(),
+      this.clearGameData.bind(this)
     );
     this.container = document.getElementById("app-container");
     this.editorAndViewerWrapper = document.createElement("div");
@@ -74,6 +75,11 @@ class App {
     if (oldEl instanceof HTMLDivElement) {
       parentEl?.replaceChild(newTable, oldEl);
     }
+  }
+
+  public clearGameData() {
+    this.game = new Game(Object.keys(levelsData).length, this.alert);
+    this.onChangeLevel("1");
   }
 
   public onChangeLevel(num: string) {
@@ -112,7 +118,8 @@ class App {
     this.levels = new Levels(
       this.onChangeLevel.bind(this),
       this.game.getCurrentLevel(),
-      this.game.getGameStats()
+      this.game.getGameStats(),
+      this.clearGameData.bind(this)
     );
     this.rerenderBlock(".levels-block", this.gameBlockElement, this.levels);
   }

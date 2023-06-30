@@ -9,3 +9,7 @@
   background: aliceblue;
   border-style: none;
 }
+
+.editor-input:focus {
+  outline: none;
+}

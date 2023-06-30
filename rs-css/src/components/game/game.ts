@@ -39,13 +39,15 @@ class Game {
   }
 
   private winLevel() {
+    if (!this.gameStats[this.currentLevel]) {
+      this.levelsDone += 1;
+    }
+
     this.gameStats[this.currentLevel] = true;
 
     if (this.currentLevel < this.levelsQty) {
       this.currentLevel += 1;
     }
-
-    this.levelsDone += 1;
 
     const dataToSave = {
       levelsDone: this.levelsDone.toString(),

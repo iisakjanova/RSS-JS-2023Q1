@@ -1,4 +1,8 @@
-import { GameStatsType, OnChangeLevelType } from "../../types";
+import {
+  GameStatsType,
+  OnChangeLevelType,
+  ClearGameDataType,
+} from "../../types";
 import "./levels.css";
 
 class Levels {
@@ -8,19 +12,27 @@ class Levels {
 
   stats: GameStatsType;
 
+  clearGameData: ClearGameDataType;
+
   constructor(
     onChangeLevel: OnChangeLevelType,
     currentLevel: string,
-    gameStats: GameStatsType
+    gameStats: GameStatsType,
+    clearGameData: ClearGameDataType
   ) {
     this.onChangeLevel = onChangeLevel;
     this.currentLevel = currentLevel;
     this.stats = gameStats;
+    this.clearGameData = clearGameData;
   }
 
   private changeLevelHandler(num: string) {
     this.onChangeLevel(num);
     localStorage.setItem("currentLevel", num);
+  }
+
+  private resetBtnHandler() {
+    this.clearGameData();
   }
 
   public render() {
@@ -69,6 +81,16 @@ class Levels {
           }
         }
       }
+    });
+
+    const resetBtn = document.createElement("button");
+    resetBtn.innerText = "reset";
+    resetBtn.className = "reset-btn";
+    levelsBlockElement.append(resetBtn);
+
+    resetBtn.addEventListener("click", () => {
+      localStorage.clear();
+      this.resetBtnHandler();
     });
 
     return levelsBlockElement;

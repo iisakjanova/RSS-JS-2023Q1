@@ -21,6 +21,8 @@ export type OnInputSubmitType = (answer: string, inputValue: string) => void;
 
 export type OnChangeLevelType = (num: string) => void;
 
+export type ClearGameDataType = () => void;
+
 export type GameStatsType = {
   [key: number]: boolean;
 };

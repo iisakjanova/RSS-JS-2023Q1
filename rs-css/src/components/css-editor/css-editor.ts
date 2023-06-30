@@ -77,6 +77,7 @@ class CssEditor implements CssEditorInterface {
     const buttonElement = document.createElement("button");
     buttonElement.type = "submit";
     buttonElement.innerText = "enter";
+    buttonElement.className = "input-btn";
 
     editorInputFormElement.append(editorInputElement);
     editorInputFormElement.append(buttonElement);

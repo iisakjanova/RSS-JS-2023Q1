@@ -51,6 +51,21 @@ body {
   width: 20%;
 }
 
+.reset-btn,
+.input-btn {
+  padding: 2px 5px;
+  background: linear-gradient(to bottom right, darkgray, black);
+  border-radius: 5px;
+  color: #a1a1a1;
+}
+
+.reset-btn:hover,
+.input-btn:hover {
+  background: linear-gradient(to bottom right, lightgray, grey);
+  color: white;
+  cursor: pointer;
+}
+
 @keyframes shake {
   0% {
     transform: translateX(0);
