@@ -1,13 +1,14 @@
+import { BlockInterface } from "../../types";
 import "./footer.css";
 
-class Footer {
+class Footer implements BlockInterface<HTMLElement> {
   footerElement: HTMLElement;
 
   constructor() {
     this.footerElement = document.createElement("footer");
   }
 
-  public render() {
+  public render(): HTMLElement {
     this.footerElement.className = "footer";
 
     const copyright = document.createElement("p");

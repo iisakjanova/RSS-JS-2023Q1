@@ -1,13 +1,9 @@
 import EditorViewerHeader from "../editor-viewer-header/editor-viewer-header";
-import { CustomNodeType } from "../../types";
+import { CustomNodeType, BlockInterface } from "../../types";
 
 import "./html-viewer.css";
 
-interface HtmlViewerInterface {
-  render(): HTMLDivElement;
-}
-
-class HtmlViewer implements HtmlViewerInterface {
+class HtmlViewer implements BlockInterface<HTMLDivElement> {
   htmlViewerBlock: HTMLDivElement;
 
   layout: CustomNodeType;
@@ -102,7 +98,7 @@ class HtmlViewer implements HtmlViewerInterface {
     return element;
   }
 
-  public render() {
+  public render(): HTMLDivElement {
     this.htmlViewerBlock.className = "html-viewer-block";
 
     const header = new EditorViewerHeader("HTML Viewer", "table.html").render();

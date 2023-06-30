@@ -1,8 +1,8 @@
-import { CustomNodeType } from "../../types";
+import { CustomNodeType, BlockInterface } from "../../types";
 
 import "./table.css";
 
-class Table {
+class Table implements BlockInterface<HTMLDivElement> {
   data: CustomNodeType;
 
   constructor(data: CustomNodeType) {
@@ -97,7 +97,7 @@ class Table {
     return element;
   }
 
-  public render() {
+  public render(): HTMLDivElement {
     const tableBlockElement = document.createElement("div");
     tableBlockElement.className = "table-block";
     tableBlockElement.appendChild(this.nodeToHtml(this.data));

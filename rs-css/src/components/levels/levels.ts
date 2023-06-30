@@ -2,10 +2,11 @@ import {
   GameStatsType,
   OnChangeLevelType,
   ClearGameDataType,
+  BlockInterface,
 } from "../../types";
 import "./levels.css";
 
-class Levels {
+class Levels implements BlockInterface<HTMLDivElement> {
   onChangeLevel: OnChangeLevelType;
 
   currentLevel: string;
@@ -35,7 +36,7 @@ class Levels {
     this.clearGameData();
   }
 
-  public render() {
+  public render(): HTMLDivElement {
     const levelsBlockElement = document.createElement("div");
     levelsBlockElement.className = "levels-block";
 

@@ -1,6 +1,7 @@
+import { BlockInterface } from "../../types";
 import "./taskInfo.css";
 
-class TaskInfo {
+class TaskInfo implements BlockInterface<HTMLDivElement> {
   title: string;
 
   description: string;
@@ -10,7 +11,7 @@ class TaskInfo {
     this.description = description;
   }
 
-  public render() {
+  public render(): HTMLDivElement {
     const taskInfoBlockElement = document.createElement("div");
     taskInfoBlockElement.className = "task-info-block";
 

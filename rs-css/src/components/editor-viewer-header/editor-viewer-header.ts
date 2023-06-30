@@ -1,10 +1,7 @@
+import { BlockInterface } from "../../types";
 import "./editor-viewer-header.css";
 
-interface EditorViewerHeaderInterface {
-  render(): HTMLDivElement;
-}
-
-class EditorViewerHeader implements EditorViewerHeaderInterface {
+class EditorViewerHeader implements BlockInterface<HTMLDivElement> {
   title: string;
 
   fileName: string;
@@ -14,7 +11,7 @@ class EditorViewerHeader implements EditorViewerHeaderInterface {
     this.fileName = fileName;
   }
 
-  public render() {
+  public render(): HTMLDivElement {
     const header = document.createElement("div");
     header.className = "editor-viewer-header";
 

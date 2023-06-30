@@ -1,13 +1,14 @@
 import EditorViewerHeader from "../editor-viewer-header/editor-viewer-header";
-import { CustomNodeType, LevelType, OnInputSubmitType } from "../../types";
+import {
+  CustomNodeType,
+  LevelType,
+  OnInputSubmitType,
+  BlockInterface,
+} from "../../types";
 
 import "./css-editor.css";
 
-export interface CssEditorInterface {
-  render(): HTMLDivElement;
-}
-
-class CssEditor implements CssEditorInterface {
+class CssEditor implements BlockInterface<HTMLDivElement> {
   onInputSubmit: OnInputSubmitType;
 
   layoutCode: CustomNodeType;
@@ -26,7 +27,7 @@ class CssEditor implements CssEditorInterface {
     this.inputValue = "";
   }
 
-  public render() {
+  public render(): HTMLDivElement {
     this.cssEditorBlock.className = "css-editor-block";
 
     const header = new EditorViewerHeader("CSS Editor", "style.css").render();

@@ -8,11 +8,7 @@ import Alert from "../alert/alert";
 import TaskInfo from "../taskInfo/taskInfo";
 import Footer from "../footer/footer";
 
-interface App {
-  render(): void;
-}
-
-export type BlockInstance = Table | HtmlViewer | CssEditor | Levels | TaskInfo;
+type BlockInstance = Table | HtmlViewer | CssEditor | Levels | TaskInfo;
 
 class App {
   cssEditor: BlockInstance;

@@ -1,3 +1,7 @@
+export interface BlockInterface<T extends HTMLElement> {
+  render(): T;
+}
+
 export type CustomNodeType = {
   id: string;
   tag: string;
