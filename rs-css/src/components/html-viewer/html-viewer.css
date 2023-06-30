@@ -1,0 +1,24 @@
+.html-viewer {
+  background: grey;
+}
+
+.html-viewer > .line-numbers {
+  background: grey;
+}
+
+.layout {
+  padding: 0 10px;
+  font-size: 20px;
+}
+
+.layout div {
+  padding-left: 20px;
+}
+
+.layout > div {
+  padding-left: 0;
+}
+
+.layout .hovered {
+  color: white;
+}
