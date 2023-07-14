@@ -31,13 +31,32 @@ class Car {
 
   private static startCarEngine(id: number) {
     const target = document.querySelector(`[data-id="${id}"]`);
-    target?.classList.add("animation");
-    const animationDuration = Math.round(
-      driveCar.distance / driveCar.velocity
-    ).toString();
 
     if (target instanceof HTMLElement) {
+      const computedStyle = getComputedStyle(target);
+      const computedLeft = computedStyle.getPropertyValue("left");
+      target.style.left = computedLeft;
+
+      target.classList.add("animation");
+      target.style.animationName = "carAnimation";
+      target.style.animationTimingFunction = "linear";
+      target.style.animationFillMode = "forwards";
+
+      const animationDuration = Math.round(
+        driveCar.distance / driveCar.velocity
+      ).toString();
       target.style.animationDuration = `${animationDuration}ms`;
+    }
+  }
+
+  private static stopCarEngine(id: number) {
+    const target = document.querySelector(`[data-id="${id}"]`);
+
+    if (target instanceof HTMLElement) {
+      const computedStyle = getComputedStyle(target);
+      const computedLeft = computedStyle.getPropertyValue("left");
+      target.style.animation = "none";
+      target.style.left = computedLeft;
     }
   }
 
@@ -106,6 +125,10 @@ class Car {
 
     engineStartButtonElement.addEventListener("click", () => {
       this.startCarEngine(id);
+    });
+
+    engineStopButtonElement.addEventListener("click", () => {
+      this.stopCarEngine(id);
     });
 
     return trackElement;
