@@ -2,7 +2,7 @@ const path = require('path');
 const { merge } = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const EslingPlugin = require('eslint-webpack-plugin');
+const EslintPlugin = require('eslint-webpack-plugin');
 const PrettierPlugin = require('prettier-webpack-plugin');
 
 const baseConfig = {
@@ -17,6 +17,14 @@ const baseConfig = {
             {
                 test: /\.css$/i,
                 use: ['style-loader', 'css-loader'],
+            },
+            {
+                test: /\.(png|jpg|gif|svg)$/i,
+                use: [
+                  {
+                    loader: 'file-loader',
+                  },
+                ],
             },
         ],
     },
@@ -33,7 +41,7 @@ const baseConfig = {
             filename: 'index.html',
         }),
         new CleanWebpackPlugin(),
-        new EslingPlugin({ extensions: 'ts' }),
+        new EslintPlugin({ extensions: ['.ts'] }),
         new PrettierPlugin(),
     ],
 };
