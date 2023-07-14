@@ -8,6 +8,11 @@ type CarDataType = {
   id: number;
 };
 
+const driveCar = {
+  velocity: 64,
+  distance: 500000,
+};
+
 class Car {
   name: string;
 
@@ -22,6 +27,18 @@ class Car {
     this.color = data.color;
     this.id = data.id;
     this.carBlockElement = document.createElement("div");
+  }
+
+  private static startCarEngine(id: number) {
+    const target = document.querySelector(`[data-id="${id}"]`);
+    target?.classList.add("animation");
+    const animationDuration = Math.round(
+      driveCar.distance / driveCar.velocity
+    ).toString();
+
+    if (target instanceof HTMLElement) {
+      target.style.animationDuration = `${animationDuration}ms`;
+    }
   }
 
   private static createElement(tag: string, className: string, content = "") {
@@ -56,7 +73,7 @@ class Car {
     return carBlockHeaderElement;
   }
 
-  private static createTrackElement(color: string) {
+  private static createTrackElement(color: string, id: number) {
     const trackElement = Car.createElement("div", "track");
 
     const carElement = Car.createElement("div", "car");
@@ -71,6 +88,7 @@ class Car {
       "B"
     );
     const carImageElement = Car.createElement("div", "car-image", car);
+    carImageElement.setAttribute("data-id", `${id}`);
     carImageElement.style.fill = color;
     carElement.append(
       engineStartButtonElement,
@@ -86,14 +104,19 @@ class Car {
 
     trackElement.append(carElement, flagElement);
 
+    engineStartButtonElement.addEventListener("click", () => {
+      this.startCarEngine(id);
+    });
+
     return trackElement;
   }
 
   public render() {
     this.carBlockElement.className = "car-block";
     const carBlockHeaderElement = Car.createCarBlockHeaderElement(this.name);
-    const trackElement = Car.createTrackElement(this.color);
+    const trackElement = Car.createTrackElement(this.color, this.id);
     this.carBlockElement.append(carBlockHeaderElement, trackElement);
+
     return this.carBlockElement;
   }
 }
