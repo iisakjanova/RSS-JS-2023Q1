@@ -33,15 +33,7 @@ class Car {
     const target = document.querySelector(`[data-id="${id}"]`);
 
     if (target instanceof HTMLElement) {
-      const computedStyle = getComputedStyle(target);
-      const computedLeft = computedStyle.getPropertyValue("left");
-      target.style.left = computedLeft;
-
       target.classList.add("animation");
-      target.style.animationName = "carAnimation";
-      target.style.animationTimingFunction = "linear";
-      target.style.animationFillMode = "forwards";
-
       const animationDuration = Math.round(
         driveCar.distance / driveCar.velocity
       ).toString();
@@ -53,10 +45,7 @@ class Car {
     const target = document.querySelector(`[data-id="${id}"]`);
 
     if (target instanceof HTMLElement) {
-      const computedStyle = getComputedStyle(target);
-      const computedLeft = computedStyle.getPropertyValue("left");
-      target.style.animation = "none";
-      target.style.left = computedLeft;
+      target.classList.remove("animation");
     }
   }
 
