@@ -1,6 +1,7 @@
 import "./car.css";
 import car from "./carImage";
 import flag from "../../../assets/flag.svg";
+import createElement from "../../functionsHelpers";
 
 type CarDataType = {
   name: string;
@@ -49,29 +50,19 @@ class Car {
     }
   }
 
-  private static createElement(tag: string, className: string, content = "") {
-    const element = document.createElement(`${tag}`);
-    element.className = `${className}`;
-
-    if (content) {
-      element.innerHTML = `${content}`;
-    }
-    return element;
-  }
-
   private static createCarBlockHeaderElement(name: string) {
-    const carBlockHeaderElement = Car.createElement("div", "car-block-header");
-    const carSelectButtonElement = Car.createElement(
+    const carBlockHeaderElement = createElement("div", "car-block-header");
+    const carSelectButtonElement = createElement(
       "button",
       "car-button",
       "select"
     );
-    const carRemoveButtonElement = Car.createElement(
+    const carRemoveButtonElement = createElement(
       "button",
       "car-button",
       "remove"
     );
-    const carNameElement = Car.createElement("span", "car-name", name);
+    const carNameElement = createElement("span", "car-name", name);
     carBlockHeaderElement.append(
       carSelectButtonElement,
       carRemoveButtonElement,
@@ -82,20 +73,20 @@ class Car {
   }
 
   private static createTrackElement(color: string, id: number) {
-    const trackElement = Car.createElement("div", "track");
+    const trackElement = createElement("div", "track");
 
-    const carElement = Car.createElement("div", "car");
-    const engineStartButtonElement = Car.createElement(
+    const carElement = createElement("div", "car");
+    const engineStartButtonElement = createElement(
       "button",
       "engine-button",
       "A"
     );
-    const engineStopButtonElement = Car.createElement(
+    const engineStopButtonElement = createElement(
       "button",
       "engine-button",
       "B"
     );
-    const carImageElement = Car.createElement("div", "car-image", car);
+    const carImageElement = createElement("div", "car-image", car);
     carImageElement.setAttribute("data-id", `${id}`);
     carImageElement.style.fill = color;
     carElement.append(
@@ -104,7 +95,7 @@ class Car {
       carImageElement
     );
 
-    const flagElement = Car.createElement("img", "flag");
+    const flagElement = createElement("img", "flag");
 
     if (flagElement instanceof HTMLImageElement) {
       flagElement.src = flag;
