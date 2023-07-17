@@ -5,6 +5,28 @@ import createElement from "../../functionsHelpers";
 import { setDriveMode, startEngine, stopEngine } from "../../api";
 import { STOP } from "../../constants";
 
+const createCarBlockHeaderElement = (name: string) => {
+  const carBlockHeaderElement = createElement("div", "car-block-header");
+  const carSelectButtonElement = createElement(
+    "button",
+    "car-button",
+    "select"
+  );
+  const carRemoveButtonElement = createElement(
+    "button",
+    "car-button",
+    "remove"
+  );
+  const carNameElement = createElement("span", "car-name", name);
+  carBlockHeaderElement.append(
+    carSelectButtonElement,
+    carRemoveButtonElement,
+    carNameElement
+  );
+
+  return carBlockHeaderElement;
+};
+
 export type CarDataType = {
   name: string;
   color: string;
@@ -64,28 +86,6 @@ class Car {
     }
   }
 
-  private static createCarBlockHeaderElement(name: string) {
-    const carBlockHeaderElement = createElement("div", "car-block-header");
-    const carSelectButtonElement = createElement(
-      "button",
-      "car-button",
-      "select"
-    );
-    const carRemoveButtonElement = createElement(
-      "button",
-      "car-button",
-      "remove"
-    );
-    const carNameElement = createElement("span", "car-name", name);
-    carBlockHeaderElement.append(
-      carSelectButtonElement,
-      carRemoveButtonElement,
-      carNameElement
-    );
-
-    return carBlockHeaderElement;
-  }
-
   private createTrackElement(color: string, id: number) {
     const trackElement = createElement("div", "track");
 
@@ -130,7 +130,7 @@ class Car {
 
   public render() {
     this.carBlockElement.className = "car-block";
-    const carBlockHeaderElement = Car.createCarBlockHeaderElement(this.name);
+    const carBlockHeaderElement = createCarBlockHeaderElement(this.name);
     const trackElement = this.createTrackElement(this.color, this.id);
     this.carBlockElement.append(carBlockHeaderElement, trackElement);
 
