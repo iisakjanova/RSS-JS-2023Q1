@@ -2,7 +2,7 @@ import "./car.css";
 import car from "./carImage";
 import flag from "../../../assets/flag.svg";
 import createElement from "../../functionsHelpers";
-import startEngine from "../../api";
+import { startEngine } from "../../api";
 
 export type CarDataType = {
   name: string;
