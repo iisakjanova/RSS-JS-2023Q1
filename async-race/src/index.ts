@@ -2,10 +2,14 @@ import App from "./components/app/app";
 
 import "./style.css";
 
-const bodyElement = document.querySelector("body");
+async function runApp() {
+  const bodyElement = document.querySelector("body");
 
-if (bodyElement) {
-  const app: App = new App();
-  const appElement = app.render();
-  bodyElement.append(appElement);
+  if (bodyElement) {
+    const app = new App();
+    const appElement = await app.render();
+    bodyElement.append(appElement);
+  }
 }
+
+runApp();

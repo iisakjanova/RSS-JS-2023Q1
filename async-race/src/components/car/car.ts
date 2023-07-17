@@ -3,7 +3,7 @@ import car from "./carImage";
 import flag from "../../../assets/flag.svg";
 import createElement from "../../functionsHelpers";
 
-type CarDataType = {
+export type CarDataType = {
   name: string;
   color: string;
   id: number;
