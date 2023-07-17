@@ -2,7 +2,8 @@ import "./car.css";
 import car from "./carImage";
 import flag from "../../../assets/flag.svg";
 import createElement from "../../functionsHelpers";
-import { startEngine } from "../../api";
+import { setDriveMode, startEngine } from "../../api";
+import { STOP } from "../../constants";
 
 export type CarDataType = {
   name: string;
@@ -34,6 +35,7 @@ class Car {
 
   public async startCarEngine(id: number) {
     const response = await startEngine(id);
+
     this.velocity = response.velocity;
     this.distance = response.distance;
     const target = document.querySelector(`[data-id="${id}"]`);
@@ -44,6 +46,12 @@ class Car {
         this.distance / this.velocity
       ).toString();
       target.style.animationDuration = `${animationDuration}ms`;
+    }
+
+    const driveModeResponse = await setDriveMode(id);
+
+    if (driveModeResponse === STOP) {
+      Car.stopCarEngine(id);
     }
   }
 
