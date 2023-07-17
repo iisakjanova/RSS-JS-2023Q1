@@ -2,16 +2,12 @@ import "./car.css";
 import car from "./carImage";
 import flag from "../../../assets/flag.svg";
 import createElement from "../../functionsHelpers";
+import startEngine from "../../api";
 
 export type CarDataType = {
   name: string;
   color: string;
   id: number;
-};
-
-const driveCar = {
-  velocity: 64,
-  distance: 500000,
 };
 
 class Car {
@@ -23,20 +19,29 @@ class Car {
 
   carBlockElement: HTMLDivElement;
 
+  velocity: number;
+
+  distance: number;
+
   constructor(data: CarDataType) {
     this.name = data.name;
     this.color = data.color;
     this.id = data.id;
     this.carBlockElement = document.createElement("div");
+    this.velocity = 0;
+    this.distance = 0;
   }
 
-  private static startCarEngine(id: number) {
+  public async startCarEngine(id: number) {
+    const response = await startEngine(id);
+    this.velocity = response.velocity;
+    this.distance = response.distance;
     const target = document.querySelector(`[data-id="${id}"]`);
 
     if (target instanceof HTMLElement) {
       target.classList.add("animation");
       const animationDuration = Math.round(
-        driveCar.distance / driveCar.velocity
+        this.distance / this.velocity
       ).toString();
       target.style.animationDuration = `${animationDuration}ms`;
     }
@@ -72,7 +77,7 @@ class Car {
     return carBlockHeaderElement;
   }
 
-  private static createTrackElement(color: string, id: number) {
+  private createTrackElement(color: string, id: number) {
     const trackElement = createElement("div", "track");
 
     const carElement = createElement("div", "car");
@@ -108,7 +113,7 @@ class Car {
     });
 
     engineStopButtonElement.addEventListener("click", () => {
-      this.stopCarEngine(id);
+      Car.stopCarEngine(id);
     });
 
     return trackElement;
@@ -117,7 +122,7 @@ class Car {
   public render() {
     this.carBlockElement.className = "car-block";
     const carBlockHeaderElement = Car.createCarBlockHeaderElement(this.name);
-    const trackElement = Car.createTrackElement(this.color, this.id);
+    const trackElement = this.createTrackElement(this.color, this.id);
     this.carBlockElement.append(carBlockHeaderElement, trackElement);
 
     return this.carBlockElement;
