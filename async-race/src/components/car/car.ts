@@ -2,7 +2,7 @@ import "./car.css";
 import car from "./carImage";
 import flag from "../../../assets/flag.svg";
 import createElement from "../../functionsHelpers";
-import { setDriveMode, startEngine } from "../../api";
+import { setDriveMode, startEngine, stopEngine } from "../../api";
 import { STOP } from "../../constants";
 
 export type CarDataType = {
@@ -55,7 +55,8 @@ class Car {
     }
   }
 
-  private static stopCarEngine(id: number) {
+  private static async stopCarEngine(id: number) {
+    await stopEngine(id);
     const target = document.querySelector(`[data-id="${id}"]`);
 
     if (target instanceof HTMLElement) {
