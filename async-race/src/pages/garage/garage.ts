@@ -43,14 +43,26 @@ class Garage {
     }
   }
 
+  private stopRace() {
+    for (let i = 0; i < this.cars.length; i += 1) {
+      this.cars[i].stopCarEngine();
+    }
+  }
+
   public render() {
     this.page.className = "garage-page";
+
     const buttonsContainer = createElement("div", "race-buttons");
     const raceButton = createElement("button", "race-button", "race");
     raceButton.addEventListener("click", () => {
       this.startRace();
     });
-    buttonsContainer.append(raceButton);
+    const resetButton = createElement("button", "reset-button", "reset");
+    resetButton.addEventListener("click", () => {
+      this.stopRace();
+    });
+    buttonsContainer.append(raceButton, resetButton);
+
     const carsElement = this.createCarsElement();
     this.page.append(buttonsContainer, carsElement);
     return this.page;

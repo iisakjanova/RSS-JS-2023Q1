@@ -94,11 +94,11 @@ class Car {
     const driveModeResponse = await setDriveMode(this.id);
 
     if (driveModeResponse === STOP) {
-      this.stopCarEngine(this.id);
+      this.stopCarEngine();
     }
   }
 
-  public async stopCarEngine(id: number) {
+  public async stopCarEngine() {
     if (
       this.engineStartButtonElement instanceof HTMLButtonElement &&
       this.engineStopButtonElement instanceof HTMLButtonElement
@@ -107,8 +107,8 @@ class Car {
       this.engineStopButtonElement.disabled = true;
     }
 
-    await stopEngine(id);
-    const target = document.querySelector(`[data-id="${id}"]`);
+    await stopEngine(this.id);
+    const target = document.querySelector(`[data-id="${this.id}"]`);
 
     if (target instanceof HTMLElement) {
       target.classList.remove("animation");
@@ -146,7 +146,7 @@ class Car {
     });
 
     this.engineStopButtonElement.addEventListener("click", () => {
-      this.stopCarEngine(id);
+      this.stopCarEngine();
     });
 
     return trackElement;
