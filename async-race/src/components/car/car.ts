@@ -46,6 +46,10 @@ class Car {
 
   distance: number;
 
+  engineStartButtonElement: HTMLElement;
+
+  engineStopButtonElement: HTMLElement;
+
   constructor(data: CarDataType) {
     this.name = data.name;
     this.color = data.color;
@@ -53,11 +57,28 @@ class Car {
     this.carBlockElement = document.createElement("div");
     this.velocity = 0;
     this.distance = 0;
+    this.engineStartButtonElement = createElement(
+      "button",
+      "engine-button",
+      "A"
+    );
+    this.engineStopButtonElement = createElement(
+      "button",
+      "engine-button",
+      "B"
+    );
   }
 
   public async startCarEngine(id: number) {
-    const response = await startEngine(id);
+    if (
+      this.engineStartButtonElement instanceof HTMLButtonElement &&
+      this.engineStopButtonElement instanceof HTMLButtonElement
+    ) {
+      this.engineStartButtonElement.disabled = true;
+      this.engineStopButtonElement.disabled = false;
+    }
 
+    const response = await startEngine(id);
     this.velocity = response.velocity;
     this.distance = response.distance;
     const target = document.querySelector(`[data-id="${id}"]`);
@@ -73,11 +94,19 @@ class Car {
     const driveModeResponse = await setDriveMode(id);
 
     if (driveModeResponse === STOP) {
-      Car.stopCarEngine(id);
+      this.stopCarEngine(id);
     }
   }
 
-  private static async stopCarEngine(id: number) {
+  private async stopCarEngine(id: number) {
+    if (
+      this.engineStartButtonElement instanceof HTMLButtonElement &&
+      this.engineStopButtonElement instanceof HTMLButtonElement
+    ) {
+      this.engineStartButtonElement.disabled = false;
+      this.engineStopButtonElement.disabled = true;
+    }
+
     await stopEngine(id);
     const target = document.querySelector(`[data-id="${id}"]`);
 
@@ -90,24 +119,19 @@ class Car {
     const trackElement = createElement("div", "track");
 
     const carElement = createElement("div", "car");
-    const engineStartButtonElement = createElement(
-      "button",
-      "engine-button",
-      "A"
-    );
-    const engineStopButtonElement = createElement(
-      "button",
-      "engine-button",
-      "B"
-    );
+
     const carImageElement = createElement("div", "car-image", car);
     carImageElement.setAttribute("data-id", `${id}`);
     carImageElement.style.fill = color;
     carElement.append(
-      engineStartButtonElement,
-      engineStopButtonElement,
+      this.engineStartButtonElement,
+      this.engineStopButtonElement,
       carImageElement
     );
+
+    if (this.engineStopButtonElement instanceof HTMLButtonElement) {
+      this.engineStopButtonElement.disabled = true;
+    }
 
     const flagElement = createElement("img", "flag");
 
@@ -117,12 +141,12 @@ class Car {
 
     trackElement.append(carElement, flagElement);
 
-    engineStartButtonElement.addEventListener("click", () => {
+    this.engineStartButtonElement.addEventListener("click", () => {
       this.startCarEngine(id);
     });
 
-    engineStopButtonElement.addEventListener("click", () => {
-      Car.stopCarEngine(id);
+    this.engineStopButtonElement.addEventListener("click", () => {
+      this.stopCarEngine(id);
     });
 
     return trackElement;
