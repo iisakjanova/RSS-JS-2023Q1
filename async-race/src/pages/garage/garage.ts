@@ -11,11 +11,17 @@ class Garage {
 
   raceCompleted: boolean;
 
+  winner: CarDataType | null;
+
+  winnerMessage: HTMLElement;
+
   constructor(data: CarDataType[]) {
     this.page = document.createElement("div");
     this.carsData = data;
     this.cars = this.createCars();
     this.raceCompleted = false;
+    this.winner = null;
+    this.winnerMessage = createElement("div", "winner-message");
   }
 
   private createCars() {
@@ -46,7 +52,7 @@ class Garage {
     }
   }
 
-  public handleAnimationEnd(event: Event) {
+  public handleAnimationEnd = (event: Event) => {
     if (this.raceCompleted) {
       return;
     }
@@ -58,19 +64,38 @@ class Garage {
         const carImageElement = carElement.querySelector(".car-image");
 
         if (carImageElement instanceof HTMLElement) {
-          const id = carImageElement.getAttribute("data-id");
-          console.log(id);
+          const id = Number(carImageElement.getAttribute("data-id"));
+          this.getWinner(id);
+          this.showWinner();
         }
       }
     }
 
     this.raceCompleted = true;
-  }
+  };
 
   private stopRace() {
     for (let i = 0; i < this.cars.length; i += 1) {
       this.cars[i].stopCarEngine();
     }
+
+    const winnerMessage = document.querySelector(".winner-message");
+
+    if (winnerMessage instanceof HTMLDivElement) {
+      winnerMessage.innerText = "";
+    }
+  }
+
+  private getWinner(id: number) {
+    const winner = this.carsData.find((car) => car.id === id);
+
+    if (winner) {
+      this.winner = winner;
+    }
+  }
+
+  private showWinner() {
+    this.winnerMessage.innerText = `${this.winner?.name} won!`;
   }
 
   public render() {
@@ -89,7 +114,7 @@ class Garage {
 
     const carsElement = this.createCarsElement();
     carsElement.addEventListener("animationend", this.handleAnimationEnd);
-    this.page.append(buttonsContainer, carsElement);
+    this.page.append(buttonsContainer, carsElement, this.winnerMessage);
     return this.page;
   }
 }

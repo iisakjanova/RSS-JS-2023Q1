@@ -1,3 +1,17 @@
+.garage-page {
+  position: relative;
+}
+
 .race-buttons {
   margin-bottom: 10px;
+}
+
+.winner-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 30px;
+  font-weight: 900;
+  color: blueviolet;
 }
