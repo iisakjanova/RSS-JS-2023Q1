@@ -9,10 +9,13 @@ class Garage {
 
   cars: Car[];
 
+  raceCompleted: boolean;
+
   constructor(data: CarDataType[]) {
     this.page = document.createElement("div");
     this.carsData = data;
     this.cars = this.createCars();
+    this.raceCompleted = false;
   }
 
   private createCars() {
@@ -43,6 +46,27 @@ class Garage {
     }
   }
 
+  public handleAnimationEnd(event: Event) {
+    if (this.raceCompleted) {
+      return;
+    }
+
+    if (event.target instanceof HTMLDivElement) {
+      const carElement = event.target.closest(".car");
+
+      if (carElement) {
+        const carImageElement = carElement.querySelector(".car-image");
+
+        if (carImageElement instanceof HTMLElement) {
+          const id = carImageElement.getAttribute("data-id");
+          console.log(id);
+        }
+      }
+    }
+
+    this.raceCompleted = true;
+  }
+
   private stopRace() {
     for (let i = 0; i < this.cars.length; i += 1) {
       this.cars[i].stopCarEngine();
@@ -64,6 +88,7 @@ class Garage {
     buttonsContainer.append(raceButton, resetButton);
 
     const carsElement = this.createCarsElement();
+    carsElement.addEventListener("animationend", this.handleAnimationEnd);
     this.page.append(buttonsContainer, carsElement);
     return this.page;
   }
