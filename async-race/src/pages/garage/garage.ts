@@ -113,6 +113,7 @@ class Garage {
 
     if (response) {
       winner.wins = response.wins + 1;
+      winner.time = Math.min(response.time, winner.time);
       updateWinner(winner);
     } else {
       createWinner(winner);
