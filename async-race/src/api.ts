@@ -1,6 +1,6 @@
 import { API_URL, STOP } from "./constants";
 
-type WinnerData = {
+export type WinnerData = {
   [key: string]: number;
 };
 
@@ -117,5 +117,56 @@ export async function createWinner(data: WinnerData) {
     }
 
     return null;
+  }
+}
+
+export async function updateWinner(data: WinnerData) {
+  const bodyData = {
+    wins: data.wins,
+    time: data.time,
+  };
+
+  try {
+    const response = await fetch(`${API_URL}winners/${data.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(bodyData),
+    });
+
+    if (!response.ok) {
+      throw new Error("Something went wrong...");
+    }
+
+    return await response.json();
+  } catch (error: Error | unknown) {
+    if (error instanceof Error) {
+      console.error("Error:", error.message);
+    } else {
+      console.error("Unknown error:", error);
+    }
+
+    return null;
+  }
+}
+
+export async function getWinner(id: number) {
+  try {
+    const response = await fetch(`${API_URL}winners/${id}`);
+
+    if (!response.ok) {
+      throw new Error("Something went wrong...");
+    }
+
+    return await response.json();
+  } catch (error: Error | unknown) {
+    if (error instanceof Error) {
+      console.error("Error:", error.message);
+    } else {
+      console.error("Unknown error:", error);
+    }
+
+    return false;
   }
 }

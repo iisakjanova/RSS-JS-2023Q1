@@ -1,7 +1,7 @@
 import createElement from "../../functionsHelpers";
 import Car, { CarDataType } from "../../components/car/car";
 import "./garage.css";
-import { createWinner } from "../../api";
+import { WinnerData, createWinner, getWinner, updateWinner } from "../../api";
 
 class Garage {
   page: HTMLDivElement;
@@ -102,14 +102,21 @@ class Garage {
     this.winnerMessage.innerText = `${winnerName} won!`;
   }
 
-  private static saveWinner(id: number, time: number) {
+  private static async saveWinner(id: number, time: number) {
     const winner = {
       id,
       wins: 1,
       time,
     };
 
-    createWinner(winner);
+    const response: WinnerData = await getWinner(id);
+
+    if (response) {
+      winner.wins = response.wins + 1;
+      updateWinner(winner);
+    } else {
+      createWinner(winner);
+    }
   }
 
   public render() {
