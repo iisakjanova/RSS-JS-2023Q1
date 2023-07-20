@@ -1,3 +1,30 @@
 .winners-page {
   color: white;
 }
+
+.winners {
+  display: flex;
+  flex-direction: column;
+}
+
+.winners-table-row span {
+  flex: 1;
+  max-width: 100px;
+  word-wrap: break-word;
+  text-align: center;
+}
+
+.winners-table-rows {
+  display: flex;
+  flex-direction: column;
+}
+
+.winners-table-row {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.winners-table-row svg {
+  max-width: 30px;
+}

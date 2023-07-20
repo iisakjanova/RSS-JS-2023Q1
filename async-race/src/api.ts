@@ -170,3 +170,23 @@ export async function getWinner(id: number) {
     return false;
   }
 }
+
+export async function getWinners() {
+  try {
+    const response = await fetch(`${API_URL}winners`);
+
+    if (!response.ok) {
+      throw new Error("Something went wrong...");
+    }
+
+    return await response.json();
+  } catch (error: Error | unknown) {
+    if (error instanceof Error) {
+      console.error("Error:", error.message);
+    } else {
+      console.error("Unknown error:", error);
+    }
+
+    return false;
+  }
+}
