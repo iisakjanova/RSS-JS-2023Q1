@@ -1,5 +1,6 @@
 import Garage from "../../pages/garage/garage";
 import { getCars } from "../../api";
+import Winners from "../../pages/winners/winners";
 
 class App {
   container: HTMLDivElement;
@@ -13,9 +14,10 @@ class App {
     const garageData = await getCars();
 
     const garagePage = new Garage(garageData).render();
+    const winnersPage = new Winners().render();
 
     if (this.container) {
-      this.container.append(garagePage);
+      this.container.append(garagePage, winnersPage);
     }
 
     return this.container;
