@@ -1,6 +1,7 @@
 import createElement from "../../functionsHelpers";
 import Car, { CarDataType } from "../../components/car/car";
 import "./garage.css";
+import { createWinner } from "../../api";
 
 class Garage {
   page: HTMLDivElement;
@@ -11,8 +12,6 @@ class Garage {
 
   raceCompleted: boolean;
 
-  winner: CarDataType | null;
-
   winnerMessage: HTMLElement;
 
   constructor(data: CarDataType[]) {
@@ -20,7 +19,6 @@ class Garage {
     this.carsData = data;
     this.cars = this.createCars();
     this.raceCompleted = false;
-    this.winner = null;
     this.winnerMessage = createElement("div", "winner-message");
   }
 
@@ -65,8 +63,10 @@ class Garage {
 
         if (carImageElement instanceof HTMLElement) {
           const id = Number(carImageElement.getAttribute("data-id"));
-          this.getWinner(id);
-          this.showWinner();
+          this.showWinner(id);
+          const winnerInstance = this.cars.filter((car) => car.id === id);
+          const winnerTime = Number(winnerInstance[0].carRaceTime) / 1000;
+          Garage.saveWinner(id, winnerTime);
         }
       }
     }
@@ -79,6 +79,7 @@ class Garage {
       this.cars[i].stopCarEngine();
     }
 
+    this.raceCompleted = false;
     const winnerMessage = document.querySelector(".winner-message");
 
     if (winnerMessage instanceof HTMLDivElement) {
@@ -86,16 +87,29 @@ class Garage {
     }
   }
 
-  private getWinner(id: number) {
+  private getWinnerName(id: number) {
     const winner = this.carsData.find((car) => car.id === id);
 
     if (winner) {
-      this.winner = winner;
+      return winner.name;
     }
+
+    return "";
   }
 
-  private showWinner() {
-    this.winnerMessage.innerText = `${this.winner?.name} won!`;
+  private showWinner(id: number) {
+    const winnerName = this.getWinnerName(id);
+    this.winnerMessage.innerText = `${winnerName} won!`;
+  }
+
+  private static saveWinner(id: number, time: number) {
+    const winner = {
+      id,
+      wins: 1,
+      time,
+    };
+
+    createWinner(winner);
   }
 
   public render() {

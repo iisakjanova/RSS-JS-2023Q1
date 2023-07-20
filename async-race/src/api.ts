@@ -1,5 +1,9 @@
 import { API_URL, STOP } from "./constants";
 
+type WinnerData = {
+  [key: string]: number;
+};
+
 export async function getCars() {
   try {
     const response = await fetch(`${API_URL}garage/`);
@@ -11,10 +15,8 @@ export async function getCars() {
     return await response.json();
   } catch (error: Error | unknown) {
     if (error instanceof Error) {
-      // Handle the specific error
       console.error("Error:", error.message);
     } else {
-      // Handle other unknown errors
       console.error("Unknown error:", error);
     }
 
@@ -35,10 +37,8 @@ export async function startEngine(id: number) {
     return await response.json();
   } catch (error: Error | unknown) {
     if (error instanceof Error) {
-      // Handle the specific error
       console.error("Error:", error.message);
     } else {
-      // Handle other unknown errors
       console.error("Unknown error:", error);
     }
 
@@ -59,10 +59,8 @@ export async function stopEngine(id: number) {
     return await response.json();
   } catch (error: Error | unknown) {
     if (error instanceof Error) {
-      // Handle the specific error
       console.error("Error:", error.message);
     } else {
-      // Handle other unknown errors
       console.error("Unknown error:", error);
     }
 
@@ -87,10 +85,34 @@ export async function setDriveMode(id: number) {
     return await response.json();
   } catch (error: Error | unknown) {
     if (error instanceof Error) {
-      // Handle the specific error
       console.error("Error:", error.message);
     } else {
-      // Handle other unknown errors
+      console.error("Unknown error:", error);
+    }
+
+    return null;
+  }
+}
+
+export async function createWinner(data: WinnerData) {
+  try {
+    const response = await fetch(`${API_URL}winners`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      throw new Error("Something went wrong...");
+    }
+
+    return await response.json();
+  } catch (error: Error | unknown) {
+    if (error instanceof Error) {
+      console.error("Error:", error.message);
+    } else {
       console.error("Unknown error:", error);
     }
 

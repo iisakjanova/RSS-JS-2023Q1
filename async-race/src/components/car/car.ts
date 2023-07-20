@@ -46,6 +46,8 @@ class Car {
 
   distance: number;
 
+  carRaceTime: string;
+
   engineStartButtonElement: HTMLElement;
 
   engineStopButtonElement: HTMLElement;
@@ -57,6 +59,7 @@ class Car {
     this.carBlockElement = document.createElement("div");
     this.velocity = 0;
     this.distance = 0;
+    this.carRaceTime = "0";
     this.engineStartButtonElement = createElement(
       "button",
       "engine-button",
@@ -89,6 +92,7 @@ class Car {
         this.distance / this.velocity
       ).toString();
       target.style.animationDuration = `${animationDuration}ms`;
+      this.carRaceTime = animationDuration;
     }
 
     const driveModeResponse = await setDriveMode(this.id);
