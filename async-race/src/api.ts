@@ -7,11 +7,6 @@ export type WinnerData = {
 export async function getCars() {
   try {
     const response = await fetch(`${API_URL}garage/`);
-
-    if (!response.ok) {
-      throw new Error("Something went wrong...");
-    }
-
     return await response.json();
   } catch (error: Error | unknown) {
     if (error instanceof Error) {
@@ -29,11 +24,6 @@ export async function startEngine(id: number) {
     const response = await fetch(`${API_URL}engine?id=${id}&status=started`, {
       method: "PATCH",
     });
-
-    if (!response.ok) {
-      throw new Error("Something went wrong...");
-    }
-
     return await response.json();
   } catch (error: Error | unknown) {
     if (error instanceof Error) {
@@ -51,11 +41,6 @@ export async function stopEngine(id: number) {
     const response = await fetch(`${API_URL}engine?id=${id}&status=stopped`, {
       method: "PATCH",
     });
-
-    if (!response.ok) {
-      throw new Error("Something went wrong...");
-    }
-
     return await response.json();
   } catch (error: Error | unknown) {
     if (error instanceof Error) {
@@ -74,12 +59,8 @@ export async function setDriveMode(id: number) {
       method: "PATCH",
     });
 
-    if (!response.ok) {
-      if (response.status === 500) {
-        return STOP;
-      }
-
-      throw new Error("Something went wrong...");
+    if (response.status === 500) {
+      return STOP;
     }
 
     return await response.json();
@@ -103,11 +84,6 @@ export async function createWinner(data: WinnerData) {
       },
       body: JSON.stringify(data),
     });
-
-    if (!response.ok) {
-      throw new Error("Something went wrong...");
-    }
-
     return await response.json();
   } catch (error: Error | unknown) {
     if (error instanceof Error) {
@@ -134,11 +110,6 @@ export async function updateWinner(data: WinnerData) {
       },
       body: JSON.stringify(bodyData),
     });
-
-    if (!response.ok) {
-      throw new Error("Something went wrong...");
-    }
-
     return await response.json();
   } catch (error: Error | unknown) {
     if (error instanceof Error) {
@@ -154,11 +125,6 @@ export async function updateWinner(data: WinnerData) {
 export async function getWinner(id: number) {
   try {
     const response = await fetch(`${API_URL}winners/${id}`);
-
-    if (!response.ok) {
-      throw new Error("Something went wrong...");
-    }
-
     return await response.json();
   } catch (error: Error | unknown) {
     if (error instanceof Error) {
@@ -174,11 +140,6 @@ export async function getWinner(id: number) {
 export async function getWinners() {
   try {
     const response = await fetch(`${API_URL}winners`);
-
-    if (!response.ok) {
-      throw new Error("Something went wrong...");
-    }
-
     return await response.json();
   } catch (error: Error | unknown) {
     if (error instanceof Error) {
