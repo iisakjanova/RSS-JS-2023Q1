@@ -13,10 +13,16 @@ class App {
 
   garageData: CarDataType[];
 
+  toGarageBtn: HTMLButtonElement | null;
+
+  toWinnersBtn: HTMLButtonElement | null;
+
   constructor() {
     this.container = document.createElement("div");
     this.winnersData = [];
     this.garageData = [];
+    this.toGarageBtn = null;
+    this.toWinnersBtn = null;
   }
 
   createWinnersPageData() {
@@ -56,6 +62,11 @@ class App {
 
     const garagePage = new Garage(this.garageData).render();
     this.container.appendChild(garagePage);
+
+    if (this.toGarageBtn && this.toWinnersBtn) {
+      this.toGarageBtn.disabled = true;
+      this.toWinnersBtn.disabled = false;
+    }
   };
 
   private handleClickToWinnersButton = () => {
@@ -68,28 +79,58 @@ class App {
 
     const winnersPage = new Winners(winnersPageData).render();
     this.container.appendChild(winnersPage);
+
+    if (this.toGarageBtn && this.toWinnersBtn) {
+      this.toGarageBtn.disabled = false;
+      this.toWinnersBtn.disabled = true;
+    }
   };
+
+  private createNavigation() {
+    const navigationBlockElement = createElement("div", "navigation");
+
+    const toGarageBtn = createElement("button", "nav-btn", "to garage");
+
+    if (toGarageBtn instanceof HTMLButtonElement) {
+      this.toGarageBtn = toGarageBtn;
+      this.toGarageBtn.addEventListener(
+        "click",
+        this.handleClickToGarageButton
+      );
+
+      navigationBlockElement.append(this.toGarageBtn);
+    }
+
+    const toWinnersBtn = createElement("button", "nav-btn", "to winners");
+
+    if (toWinnersBtn instanceof HTMLButtonElement) {
+      this.toWinnersBtn = toWinnersBtn;
+      this.toWinnersBtn.addEventListener(
+        "click",
+        this.handleClickToWinnersButton
+      );
+
+      navigationBlockElement.append(this.toWinnersBtn);
+    }
+
+    return navigationBlockElement;
+  }
 
   public async render() {
     this.container.className = "app-container";
     this.winnersData = await getWinners();
     this.garageData = await getCars();
-    const winnersPageData = this.createWinnersPageData();
 
-    const navigationBlockElement = createElement("div", "navigation");
+    const navigationBlockElement = this.createNavigation();
 
-    const toGarageBtn = createElement("button", "nav-btn", "to garage");
-    toGarageBtn.addEventListener("click", this.handleClickToGarageButton);
+    const garagePage = new Garage(this.garageData).render();
 
-    const toWinnersBtn = createElement("button", "nav-btn", "to winners");
-    toWinnersBtn.addEventListener("click", this.handleClickToWinnersButton);
-
-    navigationBlockElement.append(toGarageBtn, toWinnersBtn);
-
-    const winnersPage = new Winners(winnersPageData).render();
+    if (this.toGarageBtn) {
+      this.toGarageBtn.disabled = true;
+    }
 
     if (this.container) {
-      this.container.append(navigationBlockElement, winnersPage);
+      this.container.append(navigationBlockElement, garagePage);
     }
 
     return this.container;
