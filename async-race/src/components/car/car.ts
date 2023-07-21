@@ -3,7 +3,7 @@ import car from "./carImage";
 import flag from "../../../assets/flag.svg";
 import createElement from "../../functionsHelpers";
 import { setDriveMode, startEngine, stopEngine } from "../../api";
-import { STOP } from "../../constants";
+import { CAR_LEFT_POSITION, STOP } from "../../constants";
 
 const createCarBlockHeaderElement = (name: string) => {
   const carBlockHeaderElement = createElement("div", "car-block-header");
@@ -98,11 +98,11 @@ class Car {
     const driveModeResponse = await setDriveMode(this.id);
 
     if (driveModeResponse === STOP) {
-      this.stopCarEngine();
+      this.stopCarEngine(true);
     }
   }
 
-  public async stopCarEngine() {
+  public async stopCarEngine(status: boolean = false) {
     if (
       this.engineStartButtonElement instanceof HTMLButtonElement &&
       this.engineStopButtonElement instanceof HTMLButtonElement
@@ -115,7 +115,20 @@ class Car {
     const target = document.querySelector(`[data-id="${this.id}"]`);
 
     if (target instanceof HTMLElement) {
+      if (status) {
+        const computedStyle = getComputedStyle(target);
+        target.style.left = computedStyle.getPropertyValue("left");
+      }
+
       target.classList.remove("animation");
+    }
+  }
+
+  public resetCarPosition() {
+    const carElement = this.carBlockElement.querySelector(".car-image");
+
+    if (carElement instanceof HTMLDivElement) {
+      carElement.style.left = CAR_LEFT_POSITION;
     }
   }
 

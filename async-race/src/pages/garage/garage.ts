@@ -18,7 +18,7 @@ class Garage {
     this.page = document.createElement("div");
     this.carsData = data;
     this.cars = this.createCars();
-    this.raceCompleted = false;
+    this.raceCompleted = true;
     this.winnerMessage = createElement("div", "winner-message");
   }
 
@@ -45,6 +45,7 @@ class Garage {
   }
 
   private startRace() {
+    this.raceCompleted = false;
     for (let i = 0; i < this.cars.length; i += 1) {
       this.cars[i].startCarEngine();
     }
@@ -77,9 +78,10 @@ class Garage {
   private stopRace() {
     for (let i = 0; i < this.cars.length; i += 1) {
       this.cars[i].stopCarEngine();
+      this.cars[i].resetCarPosition();
     }
 
-    this.raceCompleted = false;
+    this.raceCompleted = true;
     const winnerMessage = document.querySelector(".winner-message");
 
     if (winnerMessage instanceof HTMLDivElement) {
