@@ -2,6 +2,9 @@ import Garage from "../../pages/garage/garage";
 import { WinnerData, getCars, getWinners } from "../../api";
 import Winners from "../../pages/winners/winners";
 import { CarDataType } from "../car/car";
+import createElement from "../../functionsHelpers";
+
+import "./app.css";
 
 class App {
   container: HTMLDivElement;
@@ -44,18 +47,49 @@ class App {
     return winnersPageData;
   }
 
+  private handleClickToGarageButton = () => {
+    const winnersPage = this.container.querySelector(".winners-page");
+
+    if (winnersPage) {
+      this.container.removeChild(winnersPage);
+    }
+
+    const garagePage = new Garage(this.garageData).render();
+    this.container.appendChild(garagePage);
+  };
+
+  private handleClickToWinnersButton = () => {
+    const winnersPageData = this.createWinnersPageData();
+    const garagePage = this.container.querySelector(".garage-page");
+
+    if (garagePage) {
+      this.container.removeChild(garagePage);
+    }
+
+    const winnersPage = new Winners(winnersPageData).render();
+    this.container.appendChild(winnersPage);
+  };
+
   public async render() {
     this.container.className = "app-container";
     this.winnersData = await getWinners();
     this.garageData = await getCars();
     const winnersPageData = this.createWinnersPageData();
 
-    const garagePage = new Garage(this.garageData).render();
+    const navigationBlockElement = createElement("div", "navigation");
+
+    const toGarageBtn = createElement("button", "nav-btn", "to garage");
+    toGarageBtn.addEventListener("click", this.handleClickToGarageButton);
+
+    const toWinnersBtn = createElement("button", "nav-btn", "to winners");
+    toWinnersBtn.addEventListener("click", this.handleClickToWinnersButton);
+
+    navigationBlockElement.append(toGarageBtn, toWinnersBtn);
 
     const winnersPage = new Winners(winnersPageData).render();
 
     if (this.container) {
-      this.container.append(garagePage, winnersPage);
+      this.container.append(navigationBlockElement, winnersPage);
     }
 
     return this.container;
