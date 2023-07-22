@@ -4,6 +4,10 @@ export type WinnerData = {
   [key: string]: number;
 };
 
+type CarData = {
+  [key: string]: string;
+};
+
 export async function getCars() {
   try {
     const response = await fetch(`${API_URL}garage/`);
@@ -149,5 +153,26 @@ export async function getWinners() {
     }
 
     return false;
+  }
+}
+
+export async function createCar(data: CarData) {
+  try {
+    const response = await fetch(`${API_URL}garage`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    return await response.json();
+  } catch (error: Error | unknown) {
+    if (error instanceof Error) {
+      console.error("Error:", error.message);
+    } else {
+      console.error("Unknown error:", error);
+    }
+
+    return null;
   }
 }

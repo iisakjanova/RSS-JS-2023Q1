@@ -2,6 +2,7 @@ import createElement from "../../functionsHelpers";
 import Car, { CarDataType } from "../../components/car/car";
 import "./garage.css";
 import { WinnerData, createWinner, getWinner, updateWinner } from "../../api";
+import AddUpdateCarForm from "../../components/form/addUpdateCarForm";
 
 class Garage {
   page: HTMLDivElement;
@@ -125,6 +126,9 @@ class Garage {
   public render() {
     this.page.className = "garage-page";
 
+    const formElementAdd = new AddUpdateCarForm("create").render();
+    const formElementUpdate = new AddUpdateCarForm("update").render();
+
     const buttonsContainer = createElement("div", "race-buttons");
     const raceButton = createElement("button", "race-button", "race");
     raceButton.addEventListener("click", () => {
@@ -138,7 +142,13 @@ class Garage {
 
     const carsElement = this.createCarsElement();
     carsElement.addEventListener("animationend", this.handleAnimationEnd);
-    this.page.append(buttonsContainer, carsElement, this.winnerMessage);
+    this.page.append(
+      formElementAdd,
+      formElementUpdate,
+      buttonsContainer,
+      carsElement,
+      this.winnerMessage
+    );
     return this.page;
   }
 }
