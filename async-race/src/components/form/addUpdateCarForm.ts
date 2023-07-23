@@ -10,9 +10,12 @@ class AddUpdateCarForm {
 
   colorInput: HTMLElement | null;
 
-  constructor(btnText: string) {
+  onChangeCars: () => void;
+
+  constructor(btnText: string, onChangeCars: () => void) {
     this.formElement = createElement("form", "form");
     this.btnText = btnText;
+    this.onChangeCars = onChangeCars;
     this.input = null;
     this.colorInput = null;
   }
@@ -32,16 +35,16 @@ class AddUpdateCarForm {
     return inputBlockElement;
   }
 
-  public handleFormSubmit() {
+  public async handleFormSubmit() {
     if (
       this.input instanceof HTMLInputElement &&
       this.colorInput instanceof HTMLInputElement
     ) {
       const car = { name: this.input.value, color: this.colorInput.value };
-      createCar(car);
+      await createCar(car);
       this.input.value = "";
-      this.colorInput.value = "";
     }
+    this.onChangeCars();
   }
 
   public render() {

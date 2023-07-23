@@ -15,12 +15,15 @@ class Garage {
 
   winnerMessage: HTMLElement;
 
-  constructor(data: CarDataType[]) {
+  onChangeCars: () => void;
+
+  constructor(data: CarDataType[], onChangeCars: () => void) {
     this.page = document.createElement("div");
     this.carsData = data;
     this.cars = this.createCars();
     this.raceCompleted = true;
     this.winnerMessage = createElement("div", "winner-message");
+    this.onChangeCars = onChangeCars;
   }
 
   private createCars() {
@@ -123,11 +126,32 @@ class Garage {
     }
   }
 
+  public setCarsData(data: CarDataType[]) {
+    this.carsData = data;
+  }
+
+  public rerenderCars() {
+    const oldCarsElement = this.page.querySelector(".cars");
+
+    if (oldCarsElement) {
+      this.page.removeChild(oldCarsElement);
+      this.cars = this.createCars();
+      const carsElement = this.createCarsElement();
+      this.page.append(carsElement);
+    }
+  }
+
   public render() {
     this.page.className = "garage-page";
 
-    const formElementAdd = new AddUpdateCarForm("create").render();
-    const formElementUpdate = new AddUpdateCarForm("update").render();
+    const formElementAdd = new AddUpdateCarForm(
+      "create",
+      this.onChangeCars.bind(this)
+    ).render();
+    const formElementUpdate = new AddUpdateCarForm(
+      "update",
+      this.onChangeCars.bind(this)
+    ).render();
 
     const buttonsContainer = createElement("div", "race-buttons");
     const raceButton = createElement("button", "race-button", "race");

@@ -17,12 +17,15 @@ class App {
 
   toWinnersBtn: HTMLButtonElement | null;
 
+  garage: Garage | null;
+
   constructor() {
     this.container = document.createElement("div");
     this.winnersData = [];
     this.garageData = [];
     this.toGarageBtn = null;
     this.toWinnersBtn = null;
+    this.garage = null;
   }
 
   createWinnersPageData() {
@@ -60,7 +63,7 @@ class App {
       this.container.removeChild(winnersPage);
     }
 
-    const garagePage = new Garage(this.garageData).render();
+    const garagePage = new Garage(this.garageData, this.onChangeCars).render();
     this.container.appendChild(garagePage);
 
     if (this.toGarageBtn && this.toWinnersBtn) {
@@ -116,6 +119,15 @@ class App {
     return navigationBlockElement;
   }
 
+  public async onChangeCars() {
+    this.garageData = await getCars();
+
+    if (this.garage) {
+      this.garage.setCarsData(this.garageData);
+      this.garage.rerenderCars();
+    }
+  }
+
   public async render() {
     this.container.className = "app-container";
     this.winnersData = await getWinners();
@@ -123,7 +135,8 @@ class App {
 
     const navigationBlockElement = this.createNavigation();
 
-    const garagePage = new Garage(this.garageData).render();
+    this.garage = new Garage(this.garageData, this.onChangeCars.bind(this));
+    const garagePage = this.garage.render();
 
     if (this.toGarageBtn) {
       this.toGarageBtn.disabled = true;
