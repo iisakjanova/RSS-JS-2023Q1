@@ -1,33 +1,10 @@
-import createElement from "../../functionsHelpers";
+import {
+  createElement,
+  createWinnersTableHeader,
+} from "../../functionsHelpers";
 import car from "../../components/car/carImage";
+import { FullWinnerData } from "../../types";
 import "./winners.css";
-
-const createWinnersTableHeader = () => {
-  const numbersElement = createElement("span", "", `Number`);
-  const carsElement = createElement("span", "", `Cars`);
-  const namesElement = createElement("span", "", `Name`);
-  const winsElement = createElement("span", "", `Wins`);
-  const timeElement = createElement("span", "", `Best time(sec)`);
-
-  const winnersHeaderElement = createElement("div", "winners-table-row");
-  winnersHeaderElement.append(
-    numbersElement,
-    carsElement,
-    namesElement,
-    winsElement,
-    timeElement
-  );
-
-  return winnersHeaderElement;
-};
-
-type FullWinnerData = {
-  id: number;
-  wins: number;
-  time: number;
-  color: string;
-  name: string;
-};
 
 class Winners {
   page: HTMLElement;

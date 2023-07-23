@@ -1,7 +1,7 @@
 import "./car.css";
 import car from "./carImage";
 import flag from "../../../assets/flag.svg";
-import createElement from "../../functionsHelpers";
+import { createElement } from "../../functionsHelpers";
 import {
   removeCar,
   removeWinner,
@@ -10,12 +10,7 @@ import {
   stopEngine,
 } from "../../api";
 import { CAR_LEFT_POSITION, STOP } from "../../constants";
-
-export type CarDataType = {
-  name: string;
-  color: string;
-  id: number;
-};
+import { CarDataType } from "../../types";
 
 class Car {
   name: string;

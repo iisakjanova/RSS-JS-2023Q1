@@ -1,16 +1,14 @@
-import { API_URL, STOP } from "./constants";
-
-export type WinnerData = {
-  [key: string]: number;
-};
-
-type CarData = {
-  [key: string]: string;
-};
+import {
+  API_URL,
+  STOP,
+  URL_ENDPOINT_GARAGE,
+  URL_ENDPOINT_WINNERS,
+} from "./constants";
+import { CarData, WinnerData } from "./types";
 
 export async function getCars() {
   try {
-    const response = await fetch(`${API_URL}garage/`);
+    const response = await fetch(`${API_URL}${URL_ENDPOINT_GARAGE}`);
     return await response.json();
   } catch (error: Error | unknown) {
     if (error instanceof Error) {
@@ -81,7 +79,7 @@ export async function setDriveMode(id: number) {
 
 export async function createWinner(data: WinnerData) {
   try {
-    const response = await fetch(`${API_URL}winners`, {
+    const response = await fetch(`${API_URL}${URL_ENDPOINT_WINNERS}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -128,7 +126,7 @@ export async function updateWinner(data: WinnerData) {
 
 export async function getWinner(id: number) {
   try {
-    const response = await fetch(`${API_URL}winners/${id}`);
+    const response = await fetch(`${API_URL}${URL_ENDPOINT_WINNERS}${id}`);
     return await response.json();
   } catch (error: Error | unknown) {
     if (error instanceof Error) {
@@ -143,7 +141,7 @@ export async function getWinner(id: number) {
 
 export async function getWinners() {
   try {
-    const response = await fetch(`${API_URL}winners`);
+    const response = await fetch(`${API_URL}${URL_ENDPOINT_WINNERS}`);
     return await response.json();
   } catch (error: Error | unknown) {
     if (error instanceof Error) {
@@ -158,7 +156,7 @@ export async function getWinners() {
 
 export async function createCar(data: CarData) {
   try {
-    const response = await fetch(`${API_URL}garage`, {
+    const response = await fetch(`${API_URL}${URL_ENDPOINT_GARAGE}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -179,7 +177,7 @@ export async function createCar(data: CarData) {
 
 export async function removeCar(id: number) {
   try {
-    const response = await fetch(`${API_URL}garage/${id}`, {
+    const response = await fetch(`${API_URL}${URL_ENDPOINT_GARAGE}${id}`, {
       method: "DELETE",
     });
     return await response.json();
@@ -196,7 +194,7 @@ export async function removeCar(id: number) {
 
 export async function removeWinner(id: number) {
   try {
-    const response = await fetch(`${API_URL}winners/${id}`, {
+    const response = await fetch(`${API_URL}${URL_ENDPOINT_WINNERS}${id}`, {
       method: "DELETE",
     });
     return await response.json();

@@ -1,9 +1,8 @@
 import Garage from "../../pages/garage/garage";
-import { WinnerData, getCars, getWinners } from "../../api";
+import { getCars, getWinners } from "../../api";
 import Winners from "../../pages/winners/winners";
-import { CarDataType } from "../car/car";
-import createElement from "../../functionsHelpers";
-
+import { createElement } from "../../functionsHelpers";
+import { CarDataType, WinnerData } from "../../types";
 import "./app.css";
 
 class App {

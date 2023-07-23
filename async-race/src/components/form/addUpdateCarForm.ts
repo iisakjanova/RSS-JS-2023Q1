@@ -1,5 +1,5 @@
 import { createCar } from "../../api";
-import createElement from "../../functionsHelpers";
+import { createElement } from "../../functionsHelpers";
 import "./addUpdateCarForm.css";
 
 class AddUpdateCarForm {

@@ -1,8 +1,9 @@
-import createElement from "../../functionsHelpers";
-import Car, { CarDataType } from "../../components/car/car";
+import { createElement } from "../../functionsHelpers";
+import Car from "../../components/car/car";
 import "./garage.css";
-import { WinnerData, createWinner, getWinner, updateWinner } from "../../api";
+import { createWinner, getWinner, updateWinner } from "../../api";
 import AddUpdateCarForm from "../../components/form/addUpdateCarForm";
+import { CarDataType, WinnerData } from "../../types";
 
 class Garage {
   page: HTMLDivElement;
