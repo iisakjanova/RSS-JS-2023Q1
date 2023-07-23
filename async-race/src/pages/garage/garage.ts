@@ -20,17 +20,17 @@ class Garage {
   constructor(data: CarDataType[], onChangeCars: () => void) {
     this.page = document.createElement("div");
     this.carsData = data;
+    this.onChangeCars = onChangeCars;
     this.cars = this.createCars();
     this.raceCompleted = true;
     this.winnerMessage = createElement("div", "winner-message");
-    this.onChangeCars = onChangeCars;
   }
 
   private createCars() {
     const cars = [];
 
     for (let i = 0; i < this.carsData.length; i += 1) {
-      const car = new Car(this.carsData[i]);
+      const car = new Car(this.carsData[i], this.onChangeCars.bind(this));
       cars.push(car);
     }
 

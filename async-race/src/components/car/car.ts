@@ -2,30 +2,8 @@ import "./car.css";
 import car from "./carImage";
 import flag from "../../../assets/flag.svg";
 import createElement from "../../functionsHelpers";
-import { setDriveMode, startEngine, stopEngine } from "../../api";
+import { removeCar, setDriveMode, startEngine, stopEngine } from "../../api";
 import { CAR_LEFT_POSITION, STOP } from "../../constants";
-
-const createCarBlockHeaderElement = (name: string) => {
-  const carBlockHeaderElement = createElement("div", "car-block-header");
-  const carSelectButtonElement = createElement(
-    "button",
-    "car-button",
-    "select"
-  );
-  const carRemoveButtonElement = createElement(
-    "button",
-    "car-button",
-    "remove"
-  );
-  const carNameElement = createElement("span", "car-name", name);
-  carBlockHeaderElement.append(
-    carSelectButtonElement,
-    carRemoveButtonElement,
-    carNameElement
-  );
-
-  return carBlockHeaderElement;
-};
 
 export type CarDataType = {
   name: string;
@@ -52,7 +30,9 @@ class Car {
 
   engineStopButtonElement: HTMLElement;
 
-  constructor(data: CarDataType) {
+  onChangeCars: () => void;
+
+  constructor(data: CarDataType, onChangeCars: () => void) {
     this.name = data.name;
     this.color = data.color;
     this.id = data.id;
@@ -70,6 +50,7 @@ class Car {
       "engine-button",
       "B"
     );
+    this.onChangeCars = onChangeCars;
   }
 
   public async startCarEngine() {
@@ -132,6 +113,30 @@ class Car {
     }
   }
 
+  createCarBlockHeaderElement(name: string) {
+    const carBlockHeaderElement = createElement("div", "car-block-header");
+    const carSelectButtonElement = createElement(
+      "button",
+      "car-button",
+      "select"
+    );
+    const carRemoveButtonElement = createElement(
+      "button",
+      "car-button",
+      "remove"
+    );
+    carRemoveButtonElement.addEventListener("click", this.handleRemoveCar);
+
+    const carNameElement = createElement("span", "car-name", name);
+    carBlockHeaderElement.append(
+      carSelectButtonElement,
+      carRemoveButtonElement,
+      carNameElement
+    );
+
+    return carBlockHeaderElement;
+  }
+
   private createTrackElement(color: string, id: number) {
     const trackElement = createElement("div", "track");
 
@@ -169,9 +174,14 @@ class Car {
     return trackElement;
   }
 
+  handleRemoveCar = async () => {
+    await removeCar(this.id);
+    this.onChangeCars();
+  };
+
   public render() {
     this.carBlockElement.className = "car-block";
-    const carBlockHeaderElement = createCarBlockHeaderElement(this.name);
+    const carBlockHeaderElement = this.createCarBlockHeaderElement(this.name);
     const trackElement = this.createTrackElement(this.color, this.id);
     this.carBlockElement.append(carBlockHeaderElement, trackElement);
 
