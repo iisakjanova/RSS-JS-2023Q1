@@ -44,6 +44,7 @@ class Garage {
       const carElement = this.cars[i].render();
       carsElement.append(carElement);
     }
+    carsElement.addEventListener("animationend", this.handleAnimationEnd);
 
     return carsElement;
   }
@@ -105,7 +106,6 @@ class Garage {
 
   private showWinner(id: number) {
     const winnerName = this.getWinnerName(id);
-    console.log(this.winnerMessage);
     this.winnerMessage.innerText = `${winnerName} won!`;
   }
 
@@ -171,7 +171,6 @@ class Garage {
       `Garage (${this.carsData.length})`
     );
     const carsElement = this.createCarsElement();
-    carsElement.addEventListener("animationend", this.handleAnimationEnd);
     this.page.append(
       formElementAdd,
       formElementUpdate,
