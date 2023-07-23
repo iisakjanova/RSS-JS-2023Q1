@@ -6,6 +6,19 @@
   margin-bottom: 10px;
 }
 
+.race-buttons button {
+  padding: 5px;
+  margin: 3px;
+  border: transparent;
+  border-radius: 3px;
+  background: linear-gradient(to right, #ff9800, #ff9800, #ffffff);
+  cursor: pointer;
+}
+
+.race-buttons button:hover {
+  background: linear-gradient(to left, #ff9800, #ff9800, #ffffff);
+}
+
 .winner-message {
   position: absolute;
   top: 50%;
