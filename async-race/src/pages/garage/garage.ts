@@ -117,7 +117,7 @@ class Garage {
 
     const response: WinnerData = await getWinner(id);
 
-    if (response) {
+    if (Object.keys(response).length > 0) {
       winner.wins = response.wins + 1;
       winner.time = Math.min(response.time, winner.time);
       updateWinner(winner);

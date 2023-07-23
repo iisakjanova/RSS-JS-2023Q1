@@ -72,7 +72,9 @@ class App {
     }
   };
 
-  private handleClickToWinnersButton = () => {
+  private handleClickToWinnersButton = async () => {
+    this.winnersData = await getWinners();
+    this.garageData = await getCars();
     const winnersPageData = this.createWinnersPageData();
     const garagePage = this.container.querySelector(".garage-page");
 
