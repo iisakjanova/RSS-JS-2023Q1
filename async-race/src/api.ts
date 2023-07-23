@@ -193,3 +193,20 @@ export async function removeCar(id: number) {
     return null;
   }
 }
+
+export async function removeWinner(id: number) {
+  try {
+    const response = await fetch(`${API_URL}winners/${id}`, {
+      method: "DELETE",
+    });
+    return await response.json();
+  } catch (error: Error | unknown) {
+    if (error instanceof Error) {
+      console.error("Error:", error.message);
+    } else {
+      console.error("Unknown error:", error);
+    }
+
+    return null;
+  }
+}

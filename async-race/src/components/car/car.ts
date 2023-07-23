@@ -2,7 +2,13 @@ import "./car.css";
 import car from "./carImage";
 import flag from "../../../assets/flag.svg";
 import createElement from "../../functionsHelpers";
-import { removeCar, setDriveMode, startEngine, stopEngine } from "../../api";
+import {
+  removeCar,
+  removeWinner,
+  setDriveMode,
+  startEngine,
+  stopEngine,
+} from "../../api";
 import { CAR_LEFT_POSITION, STOP } from "../../constants";
 
 export type CarDataType = {
@@ -176,6 +182,7 @@ class Car {
 
   handleRemoveCar = async () => {
     await removeCar(this.id);
+    await removeWinner(this.id);
     this.onChangeCars();
   };
 
