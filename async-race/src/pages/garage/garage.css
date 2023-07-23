@@ -19,6 +19,10 @@
   background: linear-gradient(to left, #ff9800, #ff9800, #ffffff);
 }
 
+.garage-page .title {
+  color: white;
+}
+
 .winner-message {
   position: absolute;
   top: 50%;

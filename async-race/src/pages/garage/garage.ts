@@ -105,6 +105,7 @@ class Garage {
 
   private showWinner(id: number) {
     const winnerName = this.getWinnerName(id);
+    console.log(this.winnerMessage);
     this.winnerMessage.innerText = `${winnerName} won!`;
   }
 
@@ -164,12 +165,18 @@ class Garage {
     });
     buttonsContainer.append(raceButton, resetButton);
 
+    const titleElement = createElement(
+      "h2",
+      "title",
+      `Garage (${this.carsData.length})`
+    );
     const carsElement = this.createCarsElement();
     carsElement.addEventListener("animationend", this.handleAnimationEnd);
     this.page.append(
       formElementAdd,
       formElementUpdate,
       buttonsContainer,
+      titleElement,
       carsElement,
       this.winnerMessage
     );

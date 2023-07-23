@@ -3,6 +3,9 @@
   max-width: 500px;
   color: white;
 }
+.winners-page .title {
+  text-align: center;
+}
 
 .winners {
   display: flex;

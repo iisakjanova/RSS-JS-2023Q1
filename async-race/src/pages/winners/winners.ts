@@ -68,8 +68,13 @@ class Winners {
   }
 
   public render() {
+    const title = createElement(
+      "h2",
+      "title",
+      `Winners (${this.winners.length})`
+    );
     const winnersElement = this.createWinnersTableElement();
-    this.page.append(winnersElement);
+    this.page.append(title, winnersElement);
     return this.page;
   }
 }
