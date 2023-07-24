@@ -1,0 +1,22 @@
+.app-container {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.navigation {
+  margin-bottom: 10px;
+}
+
+.nav-btn {
+  padding: 5px;
+  margin: 3px;
+  border: transparent;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #800080, #d8bfd8);
+}
+
+.nav-btn:not([disabled]):hover {
+  background: linear-gradient(90deg, #d8bfd8, #800080);
+  cursor: pointer;
+}

@@ -1,0 +1,21 @@
+.input-wrapper {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.form input {
+  margin-right: 5px;
+}
+
+.form .btn {
+  width: 50px;
+  padding: 5px;
+  border: transparent;
+  border-radius: 3px;
+  background: radial-gradient(circle, #6ac7ff, #007bff);
+  cursor: pointer;
+}
+
+.form .btn:hover {
+  background: radial-gradient(circle, #007bff, #6ac7ff);
+}
