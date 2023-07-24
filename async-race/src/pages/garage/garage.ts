@@ -39,7 +39,13 @@ class Garage {
   }
 
   private createCarsElement() {
+    const titleElement = createElement(
+      "h2",
+      "title",
+      `Garage (${this.carsData.length})`
+    );
     const carsElement = createElement("div", "cars");
+    carsElement.append(titleElement);
 
     for (let i = 0; i < this.cars.length; i += 1) {
       const carElement = this.cars[i].render();
@@ -166,17 +172,11 @@ class Garage {
     });
     buttonsContainer.append(raceButton, resetButton);
 
-    const titleElement = createElement(
-      "h2",
-      "title",
-      `Garage (${this.carsData.length})`
-    );
     const carsElement = this.createCarsElement();
     this.page.append(
       formElementAdd,
       formElementUpdate,
       buttonsContainer,
-      titleElement,
       carsElement,
       this.winnerMessage
     );
