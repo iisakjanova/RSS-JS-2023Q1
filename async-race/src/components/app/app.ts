@@ -62,7 +62,8 @@ class App {
       this.container.removeChild(winnersPage);
     }
 
-    const garagePage = new Garage(this.garageData, this.onChangeCars).render();
+    this.garage = new Garage(this.garageData, this.onChangeCars.bind(this));
+    const garagePage = this.garage.render();
     this.container.appendChild(garagePage);
 
     if (this.toGarageBtn && this.toWinnersBtn) {
