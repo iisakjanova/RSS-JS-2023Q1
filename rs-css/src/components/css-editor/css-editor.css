@@ -1,0 +1,15 @@
+.editor-input-form {
+  display: flex;
+  width: 100%;
+  padding: 0 10px;
+}
+
+.editor-input {
+  width: 90%;
+  background: aliceblue;
+  border-style: none;
+}
+
+.editor-input:focus {
+  outline: none;
+}
