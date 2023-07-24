@@ -1,0 +1,104 @@
+body {
+  margin: 0;
+  background: lightgray;
+}
+
+#app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 10px 0 10px;
+  border: 1px solid whitesmoke;
+  border-radius: 5px;
+}
+
+.game-block {
+  display: flex;
+  justify-content: space-between;
+}
+
+.task-block {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.editor-viewer-blocks-wrapper {
+  display: flex;
+}
+
+.css-editor,
+.html-viewer {
+  display: flex;
+  align-items: start;
+  border: 1px solid grey;
+}
+
+.line-numbers {
+  margin: 0;
+  padding: 0 10px;
+  background: lightgray;
+  list-style: none;
+  text-align: end;
+  color: #a1a1a1;
+}
+
+.line-numbers-item {
+  font-size: 20px;
+}
+
+.levels-block {
+  width: 20%;
+}
+
+.reset-btn,
+.input-btn {
+  padding: 2px 5px;
+  background: linear-gradient(to bottom right, darkgray, black);
+  border-radius: 5px;
+  color: #a1a1a1;
+}
+
+.reset-btn:hover,
+.input-btn:hover {
+  background: linear-gradient(to bottom right, lightgray, grey);
+  color: white;
+  cursor: pointer;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.shaking-animation {
+  animation: shake 0.5s;
+}
+
+@media screen and (max-width: 760px) {
+  .editor-viewer-blocks-wrapper {
+    flex-wrap: wrap;
+  }
+
+  .css-editor-block,
+  .html-viewer-block {
+    width: 100%;
+  }
+
+  .levels-block {
+    border-left: 1px solid white;
+  }
+}
