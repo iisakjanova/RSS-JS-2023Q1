@@ -30,4 +30,3 @@ There are alot of other benefits of using MUI. For example, Strong community an 
 There are a lot of companies, more than 8000, that are using MUI. The most popular of them we can see on this slide. For instanse, Spotify, Amazon, Netflix and others. So MUI is a very popular library.
 
 This is the end of my presentation. Today we explored MUI, its components, some of them, and some benefits of using this library. Thank you for your time and attention.
-
